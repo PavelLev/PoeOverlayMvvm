@@ -7,6 +7,6 @@ using PoeOverlayMvvm.Model;
 
 namespace PoeOverlayMvvm.Utility.MVVM {
     public static class ObjectsForDesignerDataContext {
-        public static Observer TestObserver1 { get; } = new Observer("Test Observer", "Test Url", -1, "chaos", false);
+        public static Observer TestObserver1 { get; } = new Observer("Test Observer", "Test Url", -1, Currency.ByName("chaos"), false);
     }
 }

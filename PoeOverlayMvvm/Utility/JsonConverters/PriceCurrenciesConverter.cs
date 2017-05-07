@@ -13,7 +13,7 @@ namespace PoeOverlayMvvm.Utility.JsonConverters {
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            throw new NotImplementedException();
+            writer.WriteValue(((Currency)value).Name);
         }
     }
 }

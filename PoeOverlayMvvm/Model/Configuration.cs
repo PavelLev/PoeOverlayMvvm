@@ -7,7 +7,7 @@ namespace PoeOverlayMvvm.Model {
     [JsonObject]
     public class Configuration {
         public static Configuration Current { get; private set; }
-        private static readonly string Path = "configuration.json";
+        private static readonly string Path = "Resources\\configuration.json";
 
         public static void Load() {
             Current = Current ?? JsonSerializerExtension.Serializer.DeserializeFromFile<Configuration>(Path);

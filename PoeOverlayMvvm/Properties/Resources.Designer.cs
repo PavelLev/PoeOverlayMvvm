@@ -59,23 +59,5 @@ namespace PoeOverlayMvvm.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [{&quot;Name&quot;:&quot;Orb of Alteration&quot;,&quot;ShortName&quot;:&quot;alteration&quot;,&quot;Id&quot;:1,&quot;Value&quot;:0.087719298245614},{&quot;Name&quot;:&quot;Orb of Fusing&quot;,&quot;ShortName&quot;:&quot;fusing&quot;,&quot;Id&quot;:2,&quot;Value&quot;:0.3278688524590163},{&quot;Name&quot;:&quot;Orb of Alchemy&quot;,&quot;ShortName&quot;:&quot;alchemy&quot;,&quot;Id&quot;:3,&quot;Value&quot;:0.3389830508474576},{&quot;Name&quot;:&quot;Chaos Orb&quot;,&quot;ShortName&quot;:&quot;chaos&quot;,&quot;Id&quot;:4,&quot;Value&quot;:1},{&quot;Name&quot;:&quot;Gemcutter&apos;s Prism&quot;,&quot;ShortName&quot;:&quot;gcp&quot;,&quot;Id&quot;:5,&quot;Value&quot;:1},{&quot;Name&quot;:&quot;Exalted Orb&quot;,&quot;ShortName&quot;:&quot;exalted&quot;,&quot;Id&quot;:6,&quot;Value&quot;:94.5},{&quot;Name&quot;:&quot;Chromatic Orb&quot;,&quot;ShortName&quot;:&quot;chrome&quot;,&quot;Id&quot;:7,&quot;Value&quot;:0.1176470588235 [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string AllCurrencies {
-            get {
-                return ResourceManager.GetString("AllCurrencies", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [&quot;alteration&quot;,&quot;chaos&quot;,&quot;exalted&quot;].
-        /// </summary>
-        internal static string PriceCurrencies {
-            get {
-                return ResourceManager.GetString("PriceCurrencies", resourceCulture);
-            }
-        }
     }
 }
