@@ -24,7 +24,7 @@ namespace PoeOverlayMvvm.Logic {
         }
 
         public static async Task UpdateAllCurrencies() {
-            var chaos = Currency.ByName("chaos");
+            var chaos = Currency.ByName("Chaos Orb");
             chaos.ApproximateValue = 1;
             
             foreach (var currency in Configuration.Current.CurrencyConfiguration.AllCurrencies.Except(new[] { chaos })) {

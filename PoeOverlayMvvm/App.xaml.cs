@@ -12,7 +12,6 @@ namespace PoeOverlayMvvm {
     /// </summary>
     public partial class App : Application {
         private void App_OnStartup(object sender, StartupEventArgs e) {
-            Configuration.Load();
             switch (e.Args.Length) {
                 case 1:
                     var bytes = Encoding.UTF8.GetBytes(e.Args[0]);
@@ -20,6 +19,7 @@ namespace PoeOverlayMvvm {
                     Shutdown();
                     break;
                 default:
+                    Configuration.Load();
                     MainWindow = new MainWindow();
                     MainWindow.Show();
                     break;

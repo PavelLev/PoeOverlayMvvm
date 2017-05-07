@@ -14,6 +14,11 @@ namespace PoeOverlayMvvm {
         public ObservableCollection<Offer> Offers { get; }
 
         public ApplicationViewModel() {
+            //without it designer throws exception
+            if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
+            {
+                Configuration.Load();
+            }
             CurrenciesObserver.InitCurrencies();
         }
 

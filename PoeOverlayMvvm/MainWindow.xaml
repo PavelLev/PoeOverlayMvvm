@@ -74,5 +74,7 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>
     </Window.Resources>
-    
+    <Grid>
+        
+    </Grid>
 </Window>
