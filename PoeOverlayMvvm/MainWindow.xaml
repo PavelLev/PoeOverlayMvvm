@@ -50,14 +50,25 @@
                 Path=Height,
                 ElementName=MainMenu,
                 Converter={converters:MultiplyConverter}, 
-                ConverterParameter=0.6}"/>
+                ConverterParameter=0.7}"/>
         </Style>
-        <Style TargetType="Label" x:Key="MainMenuItem">
+        <Style TargetType="Label" x:Key="MainMenuItemStyle">
             <Setter Property="Padding" Value="{Binding 
                 Path=Height,
                 ElementName=MainMenu,
                 Converter={converters:MultiplyConverter},
-                ConverterParameter=0.17}"/>
+                ConverterParameter=0.15}"/>
+        </Style>
+        <Style TargetType="Separator" x:Key="MainMenuVerticalSeparatorStyle"  BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Separator}">
+                        <Rectangle Width="{TemplateBinding Width}"  
+                           Fill="Black" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="3"></Setter>
         </Style>
 
         <Style TargetType="StackPanel" x:Key="SideStackPanelStyle">
@@ -67,7 +78,7 @@
                 Converter={converters:MultiplyConverter},
                 ConverterParameter=0.26}"/>
         </Style>
-        <Style TargetType="StackPanel" BasedOn="{StaticResource SideStackPanelStyle}" x:Key="ObserversStackPanelStyle">
+        <Style TargetType="StackPanel" BasedOn="{StaticResource SideStackPanelStyle}" x:Key="ItemObserversStackPanelStyle">
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
         <Style TargetType="StackPanel" BasedOn="{StaticResource SideStackPanelStyle}" x:Key="ItemOffersStackPanelStyle">
@@ -75,6 +86,29 @@
         </Style>
     </Window.Resources>
     <Grid>
-        
+        <StackPanel Style="{StaticResource ItemObserversStackPanelStyle}">
+            <ItemsControl ItemsSource="{Binding Observers}"></ItemsControl>
+        </StackPanel>
+        <StackPanel Name="MainMenu" Style="{StaticResource MainMenuStyle}">
+            <Label Style="{StaticResource MainMenuItemStyle}">
+                <Viewbox Style="{StaticResource MainMenuViewboxStyle}">
+                    <CheckBox IsChecked="{Binding ShowOnOffer, Source={x:Static model:Configuration.Current}}"/>
+                </Viewbox>
+            </Label>
+            <Label Style="{StaticResource MainMenuItemStyle}">
+                <TextBlock Text="Show on offer" Style="{StaticResource MainMenuTextStyle}"/>
+            </Label>
+            <Separator Style="{StaticResource MainMenuVerticalSeparatorStyle}" />
+            <Label Style="{StaticResource MainMenuItemStyle}">
+                <TextBlock Text="Item offer" Style="{StaticResource MainMenuTextStyle}"/>
+            </Label>
+            <Separator Style="{StaticResource MainMenuVerticalSeparatorStyle}" />
+            <Label Style="{StaticResource MainMenuItemStyle}">
+                <TextBlock Text="Currency offer" Style="{StaticResource MainMenuTextStyle}"/>
+            </Label>
+            <Label Style="{StaticResource MainMenuItemStyle}">
+                <Button Content="Test" Click="ButtonBase_OnClick" FontSize="24"/>
+            </Label>
+        </StackPanel>
     </Grid>
 </Window>

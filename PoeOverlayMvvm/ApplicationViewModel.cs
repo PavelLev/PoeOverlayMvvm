@@ -1,15 +1,17 @@
 ﻿using System.Collections.ObjectModel;
-using Newtonsoft.Json;
 using PoeOverlayMvvm.Logic;
 using PoeOverlayMvvm.Model;
 using PoeOverlayMvvm.Utility.MVVM;
 
 namespace PoeOverlayMvvm {
     public sealed class ApplicationViewModel: MyObservable {
+        private RelayCommand _testCommand;
 
-        public bool ShowOnOffer { get; set; }
+        public RelayCommand TestCommand => _testCommand ?? (_testCommand = new RelayCommand(parameter => {
+            
+        }));
 
-        public ObservableCollection<Observer> Observers { get; }
+        public ObservableCollection<SearchItem> Observers { get; }
 
         public ObservableCollection<Offer> Offers { get; }
 
@@ -19,7 +21,7 @@ namespace PoeOverlayMvvm {
             {
                 Configuration.Load();
             }
-            CurrenciesObserver.InitCurrencies();
+            AllCurrenciesObserver.InitCurrencies();
         }
 
 

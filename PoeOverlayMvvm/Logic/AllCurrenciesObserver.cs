@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using PoeOverlayMvvm.Model;
-using PoeOverlayMvvm.Utility;
 
 namespace PoeOverlayMvvm.Logic {
-    public static class CurrenciesObserver {
+    public static class AllCurrenciesObserver {
         private static Timer _updateTimer;
 
 
@@ -20,7 +14,9 @@ namespace PoeOverlayMvvm.Logic {
                 var begin = DateTime.Now;
                 await UpdateAllCurrencies();
                 MainWindow.TestTimeList.Add((int) (DateTime.Now - begin).TotalMilliseconds);
-            }, null, 0, 15 * 60 * 1000);
+                //TODO get interval value from configuration
+                _updateTimer.Change(10 * 1000, Timeout.Infinite);
+            }, null, 0, Timeout.Infinite);
         }
 
         public static async Task UpdateAllCurrencies() {

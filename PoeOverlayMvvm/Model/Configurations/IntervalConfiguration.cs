@@ -8,7 +8,15 @@ namespace PoeOverlayMvvm.Model.Configurations {
         
         public int Value {
             get => _interval;
-            set => SetField(ref _interval, value);
+            set {
+                if (value == 0) {
+                    value = Default;
+                }
+                else if (value < Minimum) {
+                    value = Minimum;
+                }
+                SetField(ref _interval, value);
+            }
         }
 
         [JsonProperty]

@@ -1,24 +1,14 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PoeOverlayMvvm.Utility.MVVM;
 
 namespace PoeOverlayMvvm.Model {
     [JsonObject]
-    public class Observer: MyObservable {
-        public static int Interval {
-            get => _interval;
-            set => _interval = value < MinimumInterval ? MinimumInterval : value;
-        }
-        public static int DefaultInterval => 1000;
-        private static readonly int MinimumInterval = 100;
-
-
+    public class SearchItem: MyObservable {
         private string _name;
         private string _url;
         private double _price;
         private Currency _currency;
         private bool _autoWhisper;
-        private static int _interval;
 
         [JsonProperty]
         public string Name {
@@ -51,7 +41,7 @@ namespace PoeOverlayMvvm.Model {
         }
 
         [JsonConstructor]
-        public Observer(string name, string url, double price, Currency currency, bool autoWhisper) {
+        public SearchItem(string name, string url, double price, Currency currency, bool autoWhisper) {
             _name = name;
             _url = url;
             _price = price;

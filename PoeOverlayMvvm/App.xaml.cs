@@ -1,16 +1,13 @@
 ﻿using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using PoeOverlayMvvm.Logic;
 using PoeOverlayMvvm.Model;
-using PoeOverlayMvvm.Utility;
 
 namespace PoeOverlayMvvm {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application {
+    public partial class App {
         private void App_OnStartup(object sender, StartupEventArgs e) {
             switch (e.Args.Length) {
                 case 1:

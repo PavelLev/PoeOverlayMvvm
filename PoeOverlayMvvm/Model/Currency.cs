@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Newtonsoft.Json;
-using PoeOverlayMvvm.Logic;
 
 namespace PoeOverlayMvvm.Model {
     [JsonObject]
@@ -22,11 +21,6 @@ namespace PoeOverlayMvvm.Model {
         public static implicit operator Currency(string name)
         {
             return Configuration.Current.CurrencyConfiguration.AllCurrencies.First(currency => currency.Name == name);
-        }
-
-        public static explicit operator string(Currency currency)
-        {
-            return currency.Name;
         }
     }
 }

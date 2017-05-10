@@ -64,7 +64,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Logic\CurrenciesObserver.cs" />
+    <Compile Include="Logic\AllCurrenciesObserver.cs" />
+    <Compile Include="Logic\SearchItemsObserver.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Configurations\CurrencyConfiguration.cs" />
     <Compile Include="Model\Configurations\IntervalConfiguration.cs" />
@@ -102,7 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utility\MVVM\MyObservable.cs" />
-    <Compile Include="Model\Observer.cs" />
+    <Compile Include="Model\SearchItem.cs" />
     <Compile Include="Model\Offer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

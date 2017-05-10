@@ -2,15 +2,23 @@
 using Newtonsoft.Json;
 using PoeOverlayMvvm.Model.Configurations;
 using PoeOverlayMvvm.Utility;
+using PoeOverlayMvvm.Utility.MVVM;
 
 namespace PoeOverlayMvvm.Model {
     [JsonObject]
-    public class Configuration {
+    public class Configuration : MyObservable {
         public static Configuration Current { get; private set; }
         private static readonly string Path = "configuration.json";
+        private bool _showOnOffer;
 
         public static void Load() {
             Current = Current ?? JsonSerializerExtension.Serializer.DeserializeFromFile<Configuration>(Path);
+        }
+
+        [JsonProperty]
+        public bool ShowOnOffer {
+            get => _showOnOffer;
+            set => SetField(ref _showOnOffer, value);
         }
 
         [JsonProperty]

@@ -14,7 +14,7 @@ namespace PoeOverlayMvvm {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window {
+    public partial class MainWindow {
         private WinEventDelegate _windowsEventMethod;
         private Timer _timer;
         
@@ -23,7 +23,7 @@ namespace PoeOverlayMvvm {
 
         public static List<int> TestTimeList = new List<int>();
 
-        private readonly Dictionary<object, Timer> textBoxDelayTimers = new Dictionary<object, Timer>();
+        private readonly Dictionary<object, Timer> _textBoxDelayTimers = new Dictionary<object, Timer>();
 
         public MainWindow() {
             InitializeComponent();
@@ -31,14 +31,14 @@ namespace PoeOverlayMvvm {
             _targetTitles.Add(Title);
 
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.TextChangedEvent, new RoutedEventHandler((sender, eventArgs) => {
-                if (!textBoxDelayTimers.ContainsKey(sender)) {
-                    textBoxDelayTimers[sender] = new Timer(state => {
+                if (!_textBoxDelayTimers.ContainsKey(sender)) {
+                    _textBoxDelayTimers[sender] = new Timer(state => {
                         Dispatcher.Invoke(((TextBox)state).GetBindingExpression(TextBox.TextProperty)
                             .UpdateSource);
                     }, sender, Timeout.Infinite, Timeout.Infinite);
                 }
 
-                textBoxDelayTimers[sender].Change(Configuration.Current.TextBoxDelay, Timeout.Infinite);
+                _textBoxDelayTimers[sender].Change(Configuration.Current.TextBoxDelay, Timeout.Infinite);
             }));
 
         }
@@ -53,7 +53,7 @@ namespace PoeOverlayMvvm {
             
             Visibility = _targetTitles.Any(targetTitle => title.StartsWith(targetTitle))
                 ? Visibility.Visible
-                : Visibility.Hidden;
+                : Visibility.Visible;
         }
 
         private void Window_StateChanged(object sender, EventArgs e) {
@@ -72,7 +72,7 @@ namespace PoeOverlayMvvm {
                 Application.Current.Shutdown();
                 return;
             }
-            hwndSource?.AddHook(WndProc);
+            hwndSource.AddHook(WndProc);
             
             var result = RegisterHotKey(Handle, HotKeyId.Hide, KeyModifier.Shift | KeyModifier.NoRepeat, KeyInterop.VirtualKeyFromKey(Key.F2));
             if (!result) {

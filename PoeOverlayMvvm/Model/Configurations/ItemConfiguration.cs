@@ -6,6 +6,7 @@ namespace PoeOverlayMvvm.Model.Configurations {
         [JsonProperty]
         public IntervalConfiguration Interval { get; }
 
+
         [JsonConstructor]
         public ItemConfiguration(IntervalConfiguration interval) {
             Interval = interval;
