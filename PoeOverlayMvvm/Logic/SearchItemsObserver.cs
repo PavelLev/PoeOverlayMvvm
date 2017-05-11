@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PoeOverlayMvvm.Logic
 {
-    class SearchItemsObserver
+    public class SearchItemsObserver
     {
     }
 }

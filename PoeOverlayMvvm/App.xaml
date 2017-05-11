@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:PoeOverlayMvvm"
              Startup="App_OnStartup">
     <Application.Resources>
-         <local:ApplicationViewModel x:Key="ApplicationViewModel"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MainWindowResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <local:ApplicationViewModel x:Key="ApplicationViewModel"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
+

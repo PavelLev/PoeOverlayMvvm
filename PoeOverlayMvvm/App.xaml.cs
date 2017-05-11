@@ -1,6 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Text;
 using System.Windows;
+using PoeOverlayMvvm.Logic;
 using PoeOverlayMvvm.Model;
 
 namespace PoeOverlayMvvm {
@@ -17,6 +18,9 @@ namespace PoeOverlayMvvm {
                     break;
                 default:
                     Configuration.Load();
+                    AllCurrenciesObserver.AutomaticUpdate();
+
+
                     MainWindow = new MainWindow();
                     MainWindow.Show();
                     break;

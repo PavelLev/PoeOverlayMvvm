@@ -17,11 +17,10 @@ namespace PoeOverlayMvvm {
 
         public ApplicationViewModel() {
             //without it designer throws exception
-            if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
+            if (true || System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
             {
                 Configuration.Load();
             }
-            AllCurrenciesObserver.InitCurrencies();
         }
 
 

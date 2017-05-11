@@ -9,7 +9,7 @@ namespace PoeOverlayMvvm.Logic {
         private static Timer _updateTimer;
 
 
-        public static void InitCurrencies() {
+        public static void AutomaticUpdate() {
             _updateTimer = new Timer(async state => {
                 var begin = DateTime.Now;
                 await UpdateAllCurrencies();

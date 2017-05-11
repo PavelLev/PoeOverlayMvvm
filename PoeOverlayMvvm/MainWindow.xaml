@@ -86,9 +86,12 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <StackPanel Style="{StaticResource ItemObserversStackPanelStyle}">
-            <ItemsControl ItemsSource="{Binding Observers}"></ItemsControl>
-        </StackPanel>
+        <Grid x:Name="Hidable">
+            <StackPanel Style="{StaticResource ItemObserversStackPanelStyle}">
+                <ItemsControl ItemsSource="{Binding Observers}"></ItemsControl>
+            </StackPanel>
+        </Grid>
+        
         <StackPanel Name="MainMenu" Style="{StaticResource MainMenuStyle}">
             <Label Style="{StaticResource MainMenuItemStyle}">
                 <Viewbox Style="{StaticResource MainMenuViewboxStyle}">
