@@ -11,13 +11,9 @@ namespace PoeOverlayMvvm {
             
         }));
 
-        public ObservableCollection<SearchItem> Observers { get; }
-
-        public ObservableCollection<Offer> Offers { get; }
-
         public ApplicationViewModel() {
             //without it designer throws exception
-            if (true || System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
+            if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
             {
                 Configuration.Load();
             }

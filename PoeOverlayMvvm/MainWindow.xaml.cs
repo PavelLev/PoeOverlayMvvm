@@ -149,7 +149,7 @@ namespace PoeOverlayMvvm {
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
-            (sender as Button).Content = TestTimeList.Count == 0 ? 0 : TestTimeList.Average();
+            (sender as Button).Content = TestTimeList.Count == 0 ? 0 : TestTimeList.Skip(TestTimeList.Count - 10).Average();
         }
     }
 }

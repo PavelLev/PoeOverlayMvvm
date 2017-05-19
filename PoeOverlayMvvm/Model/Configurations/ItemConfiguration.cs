@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
 namespace PoeOverlayMvvm.Model.Configurations {
@@ -8,9 +9,15 @@ namespace PoeOverlayMvvm.Model.Configurations {
         public IntervalConfiguration Interval { get; }
 
         [JsonProperty]
-        public List<SearchItem> CurrentSearchItems { get; }
+        public ObservableCollection<SearchItem> CurrentSearchItems { get; }
 
         [JsonProperty]
-        public List<SearchItem> OldSearchItems { get; }
+        public ObservableCollection<SearchItem> OldSearchItems { get; }
+
+        [JsonProperty]
+        public ObservableCollection<OfferedItem> CurrentOfferedItems { get; }
+
+        [JsonProperty]
+        public ObservableCollection<OfferedItem> OldOfferedItems { get; }
     }
 }

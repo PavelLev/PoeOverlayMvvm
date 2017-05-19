@@ -65,9 +65,9 @@ namespace PoeOverlayMvvm.Model {
             Currency requestedCurrency)
         {
             var url = $"{Configuration.Current.CurrencyConfiguration.CurrencyDomain}/search?league={Configuration.Current.LeagueName}&online=x&want={offeredCurrency.Id}&have={requestedCurrency.Id}";
-            var pageString = await MyHttpClient.GetStringAsync(url);
-            //try sync and stream versions
-            var document = await htmlParser.ParseAsync(pageString);
+            
+
+            var document = await htmlParser.ParseAsync(await MyHttpClient.GetStreamAsync(url));
 
             return document.QuerySelector("#content")
                 .QuerySelectorAll(".displayoffer-middle")
