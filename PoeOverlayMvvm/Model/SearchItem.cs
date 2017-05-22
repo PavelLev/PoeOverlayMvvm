@@ -54,13 +54,36 @@ namespace PoeOverlayMvvm.Model {
             });
         }
 
-        private async void WebSocketOnMessage(object sender, MessageEventArgs messageEventArgs) {
-            var postResponse = await Post();
+        public void ActivateWebSockets() {
+            WebSocketInstance.ConnectAsync();
+        }
 
-            foreach (var offeredItem in await OfferedItemsHtmlParser.Parse(postResponse.Data)) {
-                Configuration.Current.ItemConfiguration.CurrentOfferedItems.Add(offeredItem);
-                if (AutoWhisper) {
-                    offeredItem.SendWhisper();
+        private async void WebSocketOnMessage(object sender, MessageEventArgs messageEventArgs) {
+            if (!messageEventArgs.Data.StartsWith("{\"type\":\"del\",\"value\":\"")) {
+                //Websocket has informed that new offers had appeared
+                var postResponse = await Post();
+
+                foreach (var offeredItem in await OfferedItemsHtmlParser.Parse(postResponse.Data)) {
+                    Configuration.Current.ItemConfiguration.CurrentOfferedItems.Add(offeredItem);
+                    if (AutoWhisper) {
+                        offeredItem.SendWhisper();
+                    }
+                }
+            }
+            else {
+                //Websocket has informed that seller removed his offer
+                var deletedItemId = messageEventArgs.Data.Substring(23, messageEventArgs.Data.Length - 25);
+
+                var currentOfferedItems = Configuration.Current.ItemConfiguration.CurrentOfferedItems;
+                for (var i = 0; i < currentOfferedItems.Count; i++) {
+                    var offeredItem = currentOfferedItems[i];
+                    if (currentOfferedItems[i].Id != deletedItemId) {
+                        continue;
+                    }
+
+                    currentOfferedItems.RemoveAt(i);
+                    Configuration.Current.ItemConfiguration.OldOfferedItems.Add(offeredItem);
+                    break;
                 }
             }
         }

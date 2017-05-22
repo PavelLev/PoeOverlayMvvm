@@ -15,6 +15,8 @@ namespace PoeOverlayMvvm.Model {
             Current = Current ?? JsonSerializerExtension.Serializer.DeserializeFromFile<Configuration>(Path);
         }
 
+        //TODO Save + autosave
+
         [JsonProperty]
         public bool ShowOnOffer {
             get => _showOnOffer;
@@ -35,14 +37,5 @@ namespace PoeOverlayMvvm.Model {
 
         [JsonProperty]
         public ItemConfiguration ItemConfiguration { get; }
-
-        [JsonConstructor]
-        public Configuration(string leagueName, List<string> targetTitles, int textBoxDelay, CurrencyConfiguration currencyConfiguration, ItemConfiguration itemConfiguration) {
-            LeagueName = leagueName;
-            TargetTitles = targetTitles;
-            TextBoxDelay = textBoxDelay;
-            CurrencyConfiguration = currencyConfiguration;
-            ItemConfiguration = itemConfiguration;
-        }
     }
 }
