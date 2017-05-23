@@ -13,7 +13,7 @@ namespace PoeOverlayMvvm {
             switch (e.Args.Length) {
                 case 1:
                     var bytes = Encoding.UTF8.GetBytes(e.Args[0]);
-                    new UdpClient().Send(bytes, bytes.Length, "127.0.0.1", 8013);
+                    new UdpClient().Send(bytes, bytes.Length, "127.0.0.1", SearchItemsUdpServer.Port);
                     Shutdown();
                     break;
                 default:

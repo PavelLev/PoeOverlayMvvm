@@ -69,6 +69,7 @@
     </ApplicationDefinition>
     <Compile Include="Logic\AllCurrenciesObserver.cs" />
     <Compile Include="Logic\SearchItemsInteraction.cs" />
+    <Compile Include="Logic\SearchItemsUdpServer.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Configurations\CurrencyConfiguration.cs" />
     <Compile Include="Model\Configurations\IntervalConfiguration.cs" />

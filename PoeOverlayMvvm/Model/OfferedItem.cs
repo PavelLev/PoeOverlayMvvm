@@ -15,6 +15,8 @@ namespace PoeOverlayMvvm.Model
         public string Id { get; set; }
         [JsonProperty]
         public string Name { get; set; }
+        [JsonProperty]
+        public string WikiLink { get; set; }
 
         [JsonProperty]
         public Price Buyout {
@@ -42,6 +44,8 @@ namespace PoeOverlayMvvm.Model
         public string GemLevel { get; set; }
         [JsonProperty]
         public string Quality { get; set; }
+        [JsonProperty]
+        public string RequiredLevel { get; set; }
         [JsonProperty]
         public string ItemLevel { get; set; }
         [JsonProperty]
@@ -121,6 +125,7 @@ namespace PoeOverlayMvvm.Model
                         .Append(", top ")
                         .Append(StashY);
                 }
+                whisperBuilder.Append(")");
             }
 
             _whisper = whisperBuilder.ToString();
