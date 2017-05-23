@@ -68,18 +68,21 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Logic\AllCurrenciesObserver.cs" />
-    <Compile Include="Logic\SearchItemsObserver.cs" />
+    <Compile Include="Logic\SearchItemsInteraction.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Configurations\CurrencyConfiguration.cs" />
     <Compile Include="Model\Configurations\IntervalConfiguration.cs" />
     <Compile Include="Model\Configurations\ItemConfiguration.cs" />
     <Compile Include="Model\Currency.cs" />
     <Compile Include="Model\CurrencyTradeOffer.cs" />
+    <Compile Include="Model\ISearchEngine.cs" />
     <Compile Include="Model\Item\Modifier.cs" />
     <Compile Include="Model\Item\PostResponse.cs" />
     <Compile Include="Model\OfferedItem.cs" />
     <Compile Include="Model\Item\SocketLink.cs" />
     <Compile Include="Model\Item\Price.cs" />
+    <Compile Include="Model\PoeTradeInteraction.cs" />
+    <Compile Include="Model\SearchEngine\PoeTradeSearchEngine.cs" />
     <Compile Include="UserControls\ActiveObserverView.xaml.cs">
       <DependentUpon>ActiveObserverView.xaml</DependentUpon>
     </Compile>
@@ -118,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utility\MVVM\MyObservable.cs" />
-    <Compile Include="Model\SearchItem.cs" />
+    <Compile Include="Model\ItemSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

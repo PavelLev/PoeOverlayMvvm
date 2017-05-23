@@ -9,10 +9,10 @@ namespace PoeOverlayMvvm.Model.Configurations {
         public IntervalConfiguration Interval { get; }
 
         [JsonProperty]
-        public ObservableCollection<SearchItem> CurrentSearchItems { get; }
+        public ObservableCollection<ItemSearch> CurrentSearchItems { get; }
 
         [JsonProperty]
-        public ObservableCollection<SearchItem> OldSearchItems { get; }
+        public ObservableCollection<ItemSearch> OldSearchItems { get; }
 
         [JsonProperty]
         public ObservableCollection<OfferedItem> CurrentOfferedItems { get; }

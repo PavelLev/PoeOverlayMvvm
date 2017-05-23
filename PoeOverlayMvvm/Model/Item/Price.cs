@@ -22,6 +22,8 @@ namespace PoeOverlayMvvm.Model.Item
             set => SetField(ref _currency, value);
         }
 
+        public double ApproximateValue => Quantity * Currency.ApproximateValue;
+
         public string ToShortString() {
             return new StringBuilder(Quantity.ToString())
                 .Append(Currency.ShortName)
