@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
-using PoeOverlayMvvm.Model.Item;
+using PoeOverlayMvvm.Model.ItemData;
 using PoeOverlayMvvm.Utility;
 
 namespace PoeOverlayMvvm.Model
 {
     [JsonObject]
-    public class OfferedItem {
+    public class Item {
         private string _whisper;
         private Price _buyout;
 

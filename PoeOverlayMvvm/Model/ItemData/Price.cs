@@ -2,8 +2,7 @@
 using Newtonsoft.Json;
 using PoeOverlayMvvm.Utility.MVVM;
 
-namespace PoeOverlayMvvm.Model.Item
-{
+namespace PoeOverlayMvvm.Model.ItemData {
     [JsonObject]
     public class Price : MyObservable
     {

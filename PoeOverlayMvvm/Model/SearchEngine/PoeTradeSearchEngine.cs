@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using PoeOverlayMvvm.Model.Item;
+using PoeOverlayMvvm.Model.ItemData;
 using PoeOverlayMvvm.Utility;
 using WebSocketSharp;
 
@@ -15,7 +15,7 @@ namespace PoeOverlayMvvm.Model.SearchEngine
         [JsonProperty]
         public string Domain { get; set; }
 
-        public event Action<OfferedItem> OfferedItemFound;
+        public event Action<Item> OfferedItemFound;
 
         [JsonProperty]
         public string PostUrl { get; set; }

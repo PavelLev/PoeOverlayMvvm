@@ -15,9 +15,9 @@ namespace PoeOverlayMvvm.Model.Configurations {
         public ObservableCollection<ItemSearch> OldSearchItems { get; }
 
         [JsonProperty]
-        public ObservableCollection<OfferedItem> CurrentOfferedItems { get; }
+        public ObservableCollection<Item> CurrentOfferedItems { get; }
 
         [JsonProperty]
-        public ObservableCollection<OfferedItem> OldOfferedItems { get; }
+        public ObservableCollection<Item> OldOfferedItems { get; }
     }
 }

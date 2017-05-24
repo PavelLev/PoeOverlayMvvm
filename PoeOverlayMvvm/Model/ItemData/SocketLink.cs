@@ -1,5 +1,4 @@
-﻿namespace PoeOverlayMvvm.Model.Item
-{
+﻿namespace PoeOverlayMvvm.Model.ItemData {
     public class SocketLink {
         public int Red { get; set; }
 

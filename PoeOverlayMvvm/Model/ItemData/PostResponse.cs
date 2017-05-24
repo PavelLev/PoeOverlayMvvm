@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PoeOverlayMvvm.Model.Item
-{
+namespace PoeOverlayMvvm.Model.ItemData {
     [JsonObject]
     public class PostResponse
     {

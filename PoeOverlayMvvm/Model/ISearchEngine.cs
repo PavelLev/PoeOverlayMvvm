@@ -9,6 +9,6 @@ namespace PoeOverlayMvvm.Model
         [JsonProperty]
         string Domain { get; set; }
 
-        event Action<OfferedItem> OfferedItemFound;
+        event Action<Item> OfferedItemFound;
     }
 }

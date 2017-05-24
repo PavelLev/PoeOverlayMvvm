@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using AngleSharp.Parser.Html;
 using PoeOverlayMvvm.Model;
-using PoeOverlayMvvm.Model.Item;
+using PoeOverlayMvvm.Model.ItemData;
 
 namespace PoeOverlayMvvm.Utility
 {
     public static class OfferedItemsHtmlParser
     {
-        public static async Task<List<OfferedItem>> Parse(string data) {
+        public static async Task<List<Item>> Parse(string data) {
             var document = await new HtmlParser().ParseAsync(data);
 
             return document.QuerySelectorAll(".item")
                 .Select(node => {
-                    var offeredItem = new OfferedItem();
+                    var offeredItem = new Item();
 
                     offeredItem.Id = node.ClassList[1].Substring(10); // 10 - length of prefix "item-live-"
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using PoeOverlayMvvm.Model.Item;
+using PoeOverlayMvvm.Model.ItemData;
 using PoeOverlayMvvm.Utility;
 using PoeOverlayMvvm.Utility.MVVM;
 using WebSocketSharp;
@@ -32,7 +32,7 @@ namespace PoeOverlayMvvm.Model {
             set => SetField(ref _autoWhisper, value);
         }
         
-        public static event Action<ItemSearch, OfferedItem> OfferedItemFound;
+        public static event Action<ItemSearch, Item> OfferedItemFound;
         
 
         [JsonConstructor]
@@ -47,7 +47,7 @@ namespace PoeOverlayMvvm.Model {
                     MaximumBuyout.ApproximateValue) {
                     OfferedItemFound?.Invoke(this, offeredItem);
                 }
-            }
+            };
         }
     }
 }

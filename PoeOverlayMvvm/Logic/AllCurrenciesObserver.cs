@@ -10,7 +10,9 @@ namespace PoeOverlayMvvm.Logic {
     public static class AllCurrenciesObserver {
         private static Timer _updateTimer;
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public static void AutomaticUpdate() {
             _updateTimer = new Timer(async state => {
                 var begin = DateTime.Now;
