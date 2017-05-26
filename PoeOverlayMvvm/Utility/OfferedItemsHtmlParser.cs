@@ -133,7 +133,7 @@ namespace PoeOverlayMvvm.Utility
         private static Price ParsePrice(string value) {
             var parts = value.Split(' ');
             return new Price {
-                Quantity = int.Parse(parts[0]),
+                Quantity = double.Parse(parts[0]),
                 Currency = Currency.ByShortName(parts[1])
             };
         }

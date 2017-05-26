@@ -129,10 +129,5 @@
     }
   },
   "ItemConfiguration": {
-    "Interval": {
-      "Value": 1000,
-      "Default": 1000,
-      "Minimum": 100
-    }
   }
 }

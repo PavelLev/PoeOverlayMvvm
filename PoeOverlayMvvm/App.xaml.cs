@@ -18,7 +18,6 @@ namespace PoeOverlayMvvm {
                     break;
                 default:
                     Configuration.Load();
-                    AllCurrenciesObserver.AutomaticUpdate();
 
 
                     MainWindow = new MainWindow();

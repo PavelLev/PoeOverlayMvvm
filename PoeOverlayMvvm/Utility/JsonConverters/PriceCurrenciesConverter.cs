@@ -4,6 +4,8 @@ using PoeOverlayMvvm.Model;
 
 namespace PoeOverlayMvvm.Utility.JsonConverters {
     public class PriceCurrenciesConverter : JsonConverter {
+        public override bool CanRead { get; } = false;
+        public override bool CanWrite { get; } = true;
         public override bool CanConvert(Type objectType) {
             return objectType == typeof(Currency);
         }
@@ -13,7 +15,7 @@ namespace PoeOverlayMvvm.Utility.JsonConverters {
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            writer.WriteValue(((Currency)value).Name);
+            writer.WriteValue(((Currency)value).LongName);
         }
     }
 }

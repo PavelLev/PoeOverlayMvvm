@@ -6,9 +6,6 @@ namespace PoeOverlayMvvm.Model.Configurations {
     [JsonObject]
     public class ItemConfiguration {
         [JsonProperty]
-        public IntervalConfiguration Interval { get; }
-
-        [JsonProperty]
         public ObservableCollection<ItemSearch> CurrentSearchItems { get; }
 
         [JsonProperty]

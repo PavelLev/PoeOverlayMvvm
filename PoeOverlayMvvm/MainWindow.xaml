@@ -98,6 +98,11 @@
                     <CheckBox IsChecked="{Binding ShowOnOffer, Source={x:Static model:Configuration.Current}}"/>
                 </Viewbox>
             </Label>
+            <ToggleButton Background="White">
+                <Label Style="{StaticResource MainMenuItemStyle}">
+                    <TextBlock Text="Show on offer" Style="{StaticResource MainMenuTextStyle}"/>
+                </Label>
+            </ToggleButton>
             <Label Style="{StaticResource MainMenuItemStyle}">
                 <TextBlock Text="Show on offer" Style="{StaticResource MainMenuTextStyle}"/>
             </Label>

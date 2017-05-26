@@ -9,7 +9,7 @@ namespace PoeOverlayMvvm.Logic
         public static int Port => 8013;
         private static UdpClient _udpClient;
 
-        public static async void Start() {
+        public static async void Load() {
             if (_udpClient != null) {
                 return;
             }

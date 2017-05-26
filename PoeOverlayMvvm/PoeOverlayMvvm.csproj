@@ -84,14 +84,18 @@
     <Compile Include="Model\ItemData\Price.cs" />
     <Compile Include="Model\PoeTradeInteraction.cs" />
     <Compile Include="Model\SearchEngine\PoeTradeSearchEngine.cs" />
-    <Compile Include="UserControls\ActiveObserverView.xaml.cs">
-      <DependentUpon>ActiveObserverView.xaml</DependentUpon>
+    <Compile Include="UserControls\ItemSearchView.xaml.cs">
+      <DependentUpon>ItemSearchView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\PriceView.xaml.cs">
+      <DependentUpon>PriceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\JsonConverters\ISearchEngineJsonConverter.cs" />
     <Compile Include="Utility\JsonConverters\PriceCurrenciesConverter.cs" />
     <Compile Include="Utility\MVVM\Converters\MultiplyConverter.cs" />
     <Compile Include="Utility\JsonSerializerExtension.cs" />
     <Compile Include="Utility\MVVM\Converters\ObserverIntervalConverter.cs" />
-    <Compile Include="Utility\MVVM\ObjectsForDesignerDataContext.cs" />
+    <Compile Include="Utility\MVVM\DesignerDataContextObjects.cs" />
     <Compile Include="Utility\MyHttpClient.cs" />
     <Compile Include="Utility\MVVM\RelayCommand.cs" />
     <Compile Include="Utility\OfferedItemsHtmlParser.cs" />
@@ -115,7 +119,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ActiveObserverView.xaml">
+    <Page Include="UserControls\ItemSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PriceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="PoeOverlayMvvm.UserControls.ItemSearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PoeOverlayMvvm.UserControls"
+             xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM"
+             xmlns:model="clr-namespace:PoeOverlayMvvm.Model"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Static mvvm:DesignerDataContextObjects.DesignItemSearch}">
+    <StackPanel>
+        <TextBox Text="{Binding Name}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Text="{Binding MaximumBuyout.Quantity}"/>
+            <ComboBox Grid.Column="1" ItemsSource="{Binding CurrencyConfiguration.PriceCurrencies, Source={x:Static model:Configuration.Current}}" SelectedIndex="0"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

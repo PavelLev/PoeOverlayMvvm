@@ -5,7 +5,7 @@ namespace PoeOverlayMvvm.Model {
     [JsonObject]
     public class Currency {
         [JsonProperty]
-        public string Name { get; set; }
+        public string LongName { get; set; }
         [JsonProperty]
         public string ShortName { get; set; }
         [JsonProperty]
@@ -21,8 +21,8 @@ namespace PoeOverlayMvvm.Model {
         public double ApproximateValue => (OfferedValue + RequestedValue) / 
             (OfferedValue == 0 || RequestedValue == 0 ? 1 : 2);
 
-        public static Currency ByName(string name) {
-            return Configuration.Current.CurrencyConfiguration.AllCurrencies.First(currency => currency.Name == name);
+        public static Currency ByLongName(string longName) {
+            return Configuration.Current.CurrencyConfiguration.AllCurrencies.First(currency => currency.LongName == longName);
         }
 
         public static Currency ByShortName(string shortName)

@@ -13,7 +13,7 @@ namespace PoeOverlayMvvm.Model.SearchEngine
     public class PoeTradeSearchEngine : ISearchEngine
     {
         [JsonProperty]
-        public string Domain { get; set; }
+        public string Id { get; set; }
 
         public event Action<Item> OfferedItemFound;
 
@@ -23,13 +23,8 @@ namespace PoeOverlayMvvm.Model.SearchEngine
         public string WebSocketUrl { get; set; }
         private int PostId { get; set; } = -1;
         private WebSocket WebSocketInstance { get; set; }
-
-        [JsonConstructor]
-        public PoeTradeSearchEngine(string postUrl, string webSocketUrl) {
-            PostUrl = postUrl;
-            WebSocketUrl = webSocketUrl;
-
-            
+        
+        public void Search() {
             WebSocketInstance = new WebSocket(WebSocketUrl);
             WebSocketInstance.OnMessage += async (sender, messageEventArgs) => {
                 var postResponse = await Post();

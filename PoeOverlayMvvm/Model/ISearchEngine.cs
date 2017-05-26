@@ -1,14 +1,10 @@
 ﻿using System;
-using Newtonsoft.Json;
 
 namespace PoeOverlayMvvm.Model
 {
-    [JsonObject]
-    public interface ISearchEngine
-    {
-        [JsonProperty]
-        string Domain { get; set; }
-
+    public interface ISearchEngine {
         event Action<Item> OfferedItemFound;
+        string Id { get; set; }
+        void Search();
     }
 }

@@ -13,7 +13,7 @@ namespace PoeOverlayMvvm.Logic {
         /// <summary>
         /// 
         /// </summary>
-        public static void AutomaticUpdate() {
+        public static void Load() {
             _updateTimer = new Timer(async state => {
                 var begin = DateTime.Now;
                 await UpdateAllCurrencies();
@@ -24,7 +24,7 @@ namespace PoeOverlayMvvm.Logic {
         }
 
         public static async Task UpdateAllCurrencies() {
-            var chaos = Currency.ByName("Chaos Orb");
+            var chaos = Currency.ByShortName("chaos");
             chaos.OfferedValue = chaos.RequestedValue = 1;
 
             var currenciesExceptChaos = Configuration.Current.CurrencyConfiguration.AllCurrencies.Except(new[] {chaos}).ToList();

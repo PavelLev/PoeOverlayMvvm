@@ -25,7 +25,7 @@ namespace PoeOverlayMvvm.Model.Configurations {
         public CurrencyConfiguration(List<Currency> allCurrencies, List<string> priceCurrencies, int approximateValuePrecision, string currencyDomain, IntervalConfiguration interval)
         {
             AllCurrencies = allCurrencies;
-            PriceCurrencies = priceCurrencies.Select(priceCurrencyName => AllCurrencies.First(currency => currency.Name == priceCurrencyName)).ToList();
+            PriceCurrencies = priceCurrencies.Select(priceCurrencyName => AllCurrencies.First(currency => currency.LongName == priceCurrencyName)).ToList();
             ApproximateValuePrecision = approximateValuePrecision;
             CurrencyDomain = currencyDomain;
             Interval = interval;
