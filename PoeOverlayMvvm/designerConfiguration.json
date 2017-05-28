@@ -119,7 +119,7 @@
         "ApproximateValue": 0.108695652173913
       }
     ],
-    "PriceCurrencies": [ "Orb of Alteration", "Chaos Orb", "Exalted Orb" ],
+    "PriceCurrencies": [ "alchemy", "alteration", "chance", "chaos", "chisel", "chrome", "exalted", "mirror", "vaal" ],
     "ApproximateValuePrecision": 5,
     "CurrencyDomain": "http://currency.poe.trade",
     "Interval": {
@@ -129,5 +129,119 @@
     }
   },
   "ItemConfiguration": {
+    "CurrentItemSearches": [
+      {
+        "Name": "Test ItemSearch 1",
+        "SearchEngine": {
+          "Id": "designer"
+        },
+        "MaximumBuyout": {
+          "CurrencyShortName": "chaos",
+          "Quantity": -3
+        },
+        "AutoWhisper": "true"
+      },
+      {
+        "Name": "Test ItemSearch 2",
+        "SearchEngine": {
+          "Id": "designer"
+        },
+        "MaximumBuyout": {
+          "CurrencyShortName": "chaos",
+          "Quantity": -3
+        },
+        "AutoWhisper": "false"
+      },
+      {
+        "Name": "Test ItemSearch 3",
+        "SearchEngine": {
+          "Id": "designer"
+        },
+        "MaximumBuyout": {
+          "CurrencyShortName": "chaos",
+          "Quantity": -3
+        },
+        "AutoWhisper": "true"
+      },
+      {
+        "Name": "Test ItemSearch 4",
+        "SearchEngine": {
+          "Id": "designer"
+        },
+        "MaximumBuyout": {
+          "CurrencyShortName": "chaos",
+          "Quantity": -3
+        },
+        "AutoWhisper": "true"
+      },
+      {
+        "Name": "Test ItemSearch 5",
+        "SearchEngine": {
+          "Id": "designer"
+        },
+        "MaximumBuyout": {
+          "CurrencyShortName": "chaos",
+          "Quantity": -3
+        },
+        "AutoWhisper": "true"
+      }
+    ],
+    "OldItemSearches": [
+      {
+        "Name": "Test ItemSearch 11",
+        "SearchEngine": {
+          "Id": "designer"
+        },
+        "MaximumBuyout": {
+          "CurrencyShortName": "alteration",
+          "Quantity": -4
+        },
+        "AutoWhisper": "true"
+      },
+      {
+        "Name": "Test ItemSearch 12",
+        "SearchEngine": {
+          "Id": "designer"
+        },
+        "MaximumBuyout": {
+          "CurrencyShortName": "alteration",
+          "Quantity": -4
+        },
+        "AutoWhisper": "true"
+      },
+      {
+        "Name": "Test ItemSearch 13",
+        "SearchEngine": {
+          "Id": "designer"
+        },
+        "MaximumBuyout": {
+          "CurrencyShortName": "alteration",
+          "Quantity": -4
+        },
+        "AutoWhisper": "true"
+      },
+      {
+        "Name": "Test ItemSearch 14",
+        "SearchEngine": {
+          "Id": "designer"
+        },
+        "MaximumBuyout": {
+          "CurrencyShortName": "alteration",
+          "Quantity": -4
+        },
+        "AutoWhisper": "true"
+      },
+      {
+        "Name": "Test ItemSearch 15",
+        "SearchEngine": {
+          "Id": "designer"
+        },
+        "MaximumBuyout": {
+          "CurrencyShortName": "alteration",
+          "Quantity": -4
+        },
+        "AutoWhisper": "true"
+      }
+    ]
   }
 }

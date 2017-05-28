@@ -9,8 +9,8 @@ namespace PoeOverlayMvvm.Model.Configurations {
         [JsonProperty]
         public List<Currency> AllCurrencies { get; }
 
-        [JsonProperty(ItemConverterType = typeof(PriceCurrenciesConverter))]
-        public List<Currency> PriceCurrencies { get; }
+        [JsonProperty]
+        public List<string> PriceCurrencyLongNames { get; }
 
         [JsonProperty]
         public int ApproximateValuePrecision { get; }
@@ -22,10 +22,10 @@ namespace PoeOverlayMvvm.Model.Configurations {
         public IntervalConfiguration Interval { get; }
 
         [JsonConstructor]
-        public CurrencyConfiguration(List<Currency> allCurrencies, List<string> priceCurrencies, int approximateValuePrecision, string currencyDomain, IntervalConfiguration interval)
+        public CurrencyConfiguration(List<Currency> allCurrencies, List<string> priceCurrencyLongNames, int approximateValuePrecision, string currencyDomain, IntervalConfiguration interval)
         {
             AllCurrencies = allCurrencies;
-            PriceCurrencies = priceCurrencies.Select(priceCurrencyName => AllCurrencies.First(currency => currency.LongName == priceCurrencyName)).ToList();
+            PriceCurrencyLongNames = priceCurrencyLongNames;
             ApproximateValuePrecision = approximateValuePrecision;
             CurrencyDomain = currencyDomain;
             Interval = interval;

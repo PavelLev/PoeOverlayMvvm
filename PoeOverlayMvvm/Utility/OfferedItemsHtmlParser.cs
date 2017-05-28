@@ -134,7 +134,7 @@ namespace PoeOverlayMvvm.Utility
             var parts = value.Split(' ');
             return new Price {
                 Quantity = double.Parse(parts[0]),
-                Currency = Currency.ByShortName(parts[1])
+                CurrencyShortName = parts[1]
             };
         }
     }

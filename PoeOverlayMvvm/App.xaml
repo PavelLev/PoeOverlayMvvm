@@ -6,7 +6,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="MainWindowResourceDictionary.xaml"/>
+                <ResourceDictionary Source="Style/MainWindowStyle.xaml"/>
+                <ResourceDictionary Source="Style/MainMenuStyle.xaml"/>
+                <ResourceDictionary Source="Style/SidePanelStyle.xaml"/>
+                <ResourceDictionary Source="Style/ItemSearchesPanelStyle.xaml"/>
+                <ResourceDictionary Source="Style/ItemSearchStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <local:ApplicationViewModel x:Key="ApplicationViewModel"/>

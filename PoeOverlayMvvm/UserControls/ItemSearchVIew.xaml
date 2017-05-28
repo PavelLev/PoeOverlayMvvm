@@ -6,17 +6,66 @@
              xmlns:local="clr-namespace:PoeOverlayMvvm.UserControls"
              xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM"
              xmlns:model="clr-namespace:PoeOverlayMvvm.Model"
+             xmlns:converters="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Converters"
+             xmlns:configurations="clr-namespace:PoeOverlayMvvm.Model.Configurations"
+             xmlns:designer="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Designer"
+             xmlns:commandsAndConverters="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Commands"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static mvvm:DesignerDataContextObjects.DesignItemSearch}">
+             d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignItemSearch}"
+             d:DesignWidth="324">
     <StackPanel>
-        <TextBox Text="{Binding Name}"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" Text="{Binding MaximumBuyout.Quantity}"/>
-            <ComboBox Grid.Column="1" ItemsSource="{Binding CurrencyConfiguration.PriceCurrencies, Source={x:Static model:Configuration.Current}}" SelectedIndex="0"/>
-        </Grid>
+        <mvvm:BlankUserControl>
+            <TextBox Text="{Binding Name}" Style="{StaticResource ItemSearchNameTextBoxStyle}"/>
+        </mvvm:BlankUserControl>
+        <mvvm:BlankUserControl>
+            <local:PriceView DataContext="{Binding MaximumBuyout}"/>
+        </mvvm:BlankUserControl>
+        <mvvm:BlankUserControl>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button CommandParameter="{Binding}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Value="True">
+                                    <DataTrigger.Binding>
+                                        <MultiBinding Converter="{converters:ElementInIListConverter}">
+                                            <Binding/>
+                                            <Binding Path="ItemConfiguration.CurrentItemSearches" Source="{x:Static model:Configuration.Current}"/>
+                                        </MultiBinding>
+                                    </DataTrigger.Binding>
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <TextBlock Text="Remove"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Button.Command" Value="{x:Static commandsAndConverters:ItemSearchCommands.MoveToOld}"/>
+                                </DataTrigger>
+                                <DataTrigger Value="True">
+                                    <DataTrigger.Binding>
+                                        <MultiBinding Converter="{converters:ElementInIListConverter}">
+                                            <Binding/>
+                                            <Binding Path="ItemConfiguration.OldItemSearches" Source="{x:Static model:Configuration.Current}"/>
+                                        </MultiBinding>
+                                    </DataTrigger.Binding>
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <TextBlock Text="Restore"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Button.Command" Value="{x:Static commandsAndConverters:ItemSearchCommands.MoveToCurrent}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <ToggleButton Grid.Column="1" IsChecked="{Binding AutoWhisper}">
+                    <TextBlock Text="Autowhisper"/>
+                </ToggleButton>
+            </Grid>
+        </mvvm:BlankUserControl>
     </StackPanel>
 </UserControl>

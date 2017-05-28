@@ -8,26 +8,31 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PoeOverlayMvvm.Model;
 using PoeOverlayMvvm.Model.SearchEngine;
+using PoeOverlayMvvm.Utility.MVVM.Designer;
 
 namespace PoeOverlayMvvm.Utility.JsonConverters
 {
-    public class ISearchEngineJsonConverter : JsonConverter {
+    public class SearchEngineJsonConverter : JsonConverter {
         public override bool CanRead { get; } = true;
         public override bool CanWrite { get; } = false;
 
         public override bool CanConvert(Type objectType) {
-            return typeof(ISearchEngine).IsAssignableFrom(objectType);
+            return typeof(ISearchEngine) == objectType;
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
             var jsonObject = JObject.Load(reader);
-            var searchEngine = default(ISearchEngine);
+            ISearchEngine searchEngine;
 
 
             var searchEngineId = jsonObject["Id"].Value<string>();
             switch (searchEngineId) {
                 case "poe.trade": {
                     searchEngine = new PoeTradeSearchEngine();
+                    break;
+                }
+                case "designer": {
+                    searchEngine = new DesignerSearchEngine();
                     break;
                 }
                 default: {
@@ -38,7 +43,7 @@ namespace PoeOverlayMvvm.Utility.JsonConverters
 
             serializer.Populate(jsonObject.CreateReader(), searchEngine);
 
-            searchEngine.Search();
+            searchEngine.Initialize();
 
             return searchEngine;
         }

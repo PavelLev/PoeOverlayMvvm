@@ -10,7 +10,7 @@ namespace PoeOverlayMvvm.Model {
         [JsonProperty]
         public string Name { get; set; }
 
-        [JsonProperty(ItemConverterType = typeof(ISearchEngineJsonConverter))]
+        [JsonConverter(typeof(SearchEngineJsonConverter))]
         public ISearchEngine SearchEngine { get; set; }
 
         [JsonProperty]

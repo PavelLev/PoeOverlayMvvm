@@ -7,7 +7,7 @@ namespace PoeOverlayMvvm.Model.ItemData {
     public class Price : MyObservable
     {
         private double _quantity;
-        private Currency _currency;
+        private string _currencyShortName;
 
         [JsonProperty]
         public double Quantity {
@@ -16,17 +16,12 @@ namespace PoeOverlayMvvm.Model.ItemData {
         }
 
         [JsonProperty]
-        public Currency Currency {
-            get => _currency;
-            set => SetField(ref _currency, value);
+        public string CurrencyShortName {
+            get => _currencyShortName;
+            set => SetField(ref _currencyShortName, value);
         }
 
-        public double ApproximateValue => Quantity * Currency.ApproximateValue;
-
-        public string ToShortString() {
-            return new StringBuilder(Quantity.ToString())
-                .Append(Currency.ShortName)
-                .ToString();
-        }
+        public double ApproximateValue => Quantity * Currency.ByShortName(CurrencyShortName).ApproximateValue;
+        
     }
 }

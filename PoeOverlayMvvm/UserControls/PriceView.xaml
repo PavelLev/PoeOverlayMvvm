@@ -5,9 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PoeOverlayMvvm.UserControls"
              xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM"
+             xmlns:model="clr-namespace:PoeOverlayMvvm.Model"
+             xmlns:designer="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Designer"
              mc:Ignorable="d" 
-             d:DataContext="{x:Static mvvm:DesignerDataContextObjects.DesignPrice}">
-    <StackPanel Orientation="Horizontal">
-        <TextBox Text="{Binding Quantity}"></TextBox>
-    </StackPanel>
+             d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignPrice}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Column="0" Text="{Binding Quantity}"/>
+        <ComboBox Grid.Column="1" ItemsSource="{Binding CurrencyConfiguration.PriceCurrencyLongNames, Source={x:Static model:Configuration.Current}}" DisplayMemberPath="LongName" SelectedItem="{Binding CurrencyShortName}"/>
+    </Grid>
 </UserControl>

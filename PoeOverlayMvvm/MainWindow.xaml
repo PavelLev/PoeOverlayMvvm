@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:model="clr-namespace:PoeOverlayMvvm.Model"
         xmlns:converters="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Converters"
+        xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM"
+        xmlns:userControls="clr-namespace:PoeOverlayMvvm.UserControls"
+        xmlns:designer="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Designer"
         mc:Ignorable="d"
         Name="Window"
         Title="PoeOverlay"
@@ -12,110 +15,35 @@
         WindowStartupLocation="Manual"
         StateChanged="Window_StateChanged"
         SourceInitialized="MainWindow_OnSourceInitialized"
-        Closing="Window_Closing">
-    <Window.Style>
-        <Style TargetType="Window">
-            <Setter Property="Height" Value="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}"/>
-            <Setter Property="Width" Value="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}"/>
-            <Setter Property="ShowActivated" Value="False"/>
-            <Setter Property="Topmost" Value="True"/>
-            <Setter Property="WindowStyle" Value="None"/>
-            <Setter Property="AllowsTransparency" Value="True"/>
-            <Setter Property="Background" Value="{x:Null}"/>
-            <Setter Property="Left" Value="0"/>
-            <Setter Property="Top" Value="0"/>
-        </Style>
-    </Window.Style>
-    <Window.Resources>
-        <Style TargetType="StackPanel" x:Key="MainMenuStyle">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="Height" Value="{Binding 
-                Path=Height, 
-                ElementName=Window,
-                Converter={converters:MultiplyConverter}, 
-                ConverterParameter=0.05}"/>
-        </Style>
-        <Style TargetType="TextBlock" x:Key="MainMenuTextStyle">
-            <Setter Property="FontSize" Value="{Binding 
-                Path=Height,
-                ElementName=MainMenu,
-                Converter={converters:MultiplyConverter}, 
-                ConverterParameter=0.5}"/>
-        </Style>
-        <Style TargetType="Viewbox" x:Key="MainMenuViewboxStyle">
-            <Setter Property="Height" Value="{Binding 
-                Path=Height,
-                ElementName=MainMenu,
-                Converter={converters:MultiplyConverter}, 
-                ConverterParameter=0.7}"/>
-        </Style>
-        <Style TargetType="Label" x:Key="MainMenuItemStyle">
-            <Setter Property="Padding" Value="{Binding 
-                Path=Height,
-                ElementName=MainMenu,
-                Converter={converters:MultiplyConverter},
-                ConverterParameter=0.15}"/>
-        </Style>
-        <Style TargetType="Separator" x:Key="MainMenuVerticalSeparatorStyle"  BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Separator}">
-                        <Rectangle Width="{TemplateBinding Width}"  
-                           Fill="Black" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Width" Value="3"></Setter>
-        </Style>
-
-        <Style TargetType="StackPanel" x:Key="SideStackPanelStyle">
-            <Setter Property="Width" Value="{Binding
-                Path=Height,
-                ElementName=Window, 
-                Converter={converters:MultiplyConverter},
-                ConverterParameter=0.26}"/>
-        </Style>
-        <Style TargetType="StackPanel" BasedOn="{StaticResource SideStackPanelStyle}" x:Key="ItemObserversStackPanelStyle">
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-        </Style>
-        <Style TargetType="StackPanel" BasedOn="{StaticResource SideStackPanelStyle}" x:Key="ItemOffersStackPanelStyle">
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-        </Style>
-    </Window.Resources>
+        Closing="Window_Closing"
+        Style="{StaticResource MainWindowStyle}"
+        d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignViewModel}">
     <Grid>
         <Grid x:Name="Hidable">
-            <StackPanel Style="{StaticResource ItemObserversStackPanelStyle}">
-                <ItemsControl ItemsSource="{Binding Observers}"></ItemsControl>
-            </StackPanel>
+            <userControls:ItemSearchesPanelView Style="{StaticResource ItemSearchesPanelStyle}"/>
         </Grid>
         
         <StackPanel Name="MainMenu" Style="{StaticResource MainMenuStyle}">
-            <Label Style="{StaticResource MainMenuItemStyle}">
-                <Viewbox Style="{StaticResource MainMenuViewboxStyle}">
-                    <CheckBox IsChecked="{Binding ShowOnOffer, Source={x:Static model:Configuration.Current}}"/>
-                </Viewbox>
-            </Label>
-            <ToggleButton Background="White">
-                <Label Style="{StaticResource MainMenuItemStyle}">
-                    <TextBlock Text="Show on offer" Style="{StaticResource MainMenuTextStyle}"/>
-                </Label>
-            </ToggleButton>
-            <Label Style="{StaticResource MainMenuItemStyle}">
-                <TextBlock Text="Show on offer" Style="{StaticResource MainMenuTextStyle}"/>
-            </Label>
-            <Separator Style="{StaticResource MainMenuVerticalSeparatorStyle}" />
-            <Label Style="{StaticResource MainMenuItemStyle}">
-                <TextBlock Text="Item offer" Style="{StaticResource MainMenuTextStyle}"/>
-            </Label>
-            <Separator Style="{StaticResource MainMenuVerticalSeparatorStyle}" />
-            <Label Style="{StaticResource MainMenuItemStyle}">
-                <TextBlock Text="Currency offer" Style="{StaticResource MainMenuTextStyle}"/>
-            </Label>
-            <Label Style="{StaticResource MainMenuItemStyle}">
-                <Button Content="Test" Click="ButtonBase_OnClick" FontSize="24"/>
+            <StackPanel.Resources>
+                <Style TargetType="mvvm:BlankUserControl" BasedOn="{StaticResource MainMenuContentControlStyle}"></Style>
+            </StackPanel.Resources>
+            <mvvm:BlankUserControl>
+                <ToggleButton IsChecked="{Binding ShowOnOffer, Source={x:Static model:Configuration.Current}}">
+                    <TextBlock Text="Show on offer"/>
+                </ToggleButton>
+            </mvvm:BlankUserControl>
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+            <mvvm:BlankUserControl>
+                <TextBlock Text="Item offer"/>
+            </mvvm:BlankUserControl>
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+            <mvvm:BlankUserControl>
+                <TextBlock Text="Currency offer"/>
+            </mvvm:BlankUserControl>
+            
+            
+            <Label>
+                <Button Content="Test" Click="ButtonBase_OnClick" FontSize="16"/>
             </Label>
         </StackPanel>
     </Grid>

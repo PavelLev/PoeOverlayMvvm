@@ -9,10 +9,27 @@ namespace PoeOverlayMvvm.Model {
     [JsonObject]
     public class Configuration {
         public static Configuration Current { get; private set; }
-        private static readonly string Path = "configuration.json";
+        private static string _path = "configuration.json";
+
+        static Configuration() {
+            Load();
+        }
 
         public static void Load() {
-            Current = Current ?? JsonSerializerExtension.Serializer.DeserializeFromFile<Configuration>(Path);
+            if (Current != null) {
+                return;
+            }
+
+            if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime) {
+                _path = "N:\\PoE\\projects\\PoeOverlayMvvm\\PoeOverlayMvvm\\designerConfiguration.json";
+            }
+
+            Current = JsonSerializerExtension.Serializer.DeserializeFromFile<Configuration>(_path);
+
+            if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime) {
+                return;
+            }
+
             AllCurrenciesObserver.Load();
             ItemSearchUdpServer.Load();
         }
@@ -36,5 +53,15 @@ namespace PoeOverlayMvvm.Model {
 
         [JsonProperty]
         public ItemConfiguration ItemConfiguration { get; }
+
+        [JsonConstructor]
+        public Configuration(bool showOnOffer, string leagueName, List<string> targetTitles, int textBoxDelay, CurrencyConfiguration currencyConfiguration, ItemConfiguration itemConfiguration) {
+            ShowOnOffer = showOnOffer;
+            LeagueName = leagueName;
+            TargetTitles = targetTitles;
+            TextBoxDelay = textBoxDelay;
+            CurrencyConfiguration = currencyConfiguration;
+            ItemConfiguration = itemConfiguration;
+        }
     }
 }

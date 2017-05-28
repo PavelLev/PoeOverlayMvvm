@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="PoeOverlayMvvm.UserControls.ItemSearchesPanelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:PoeOverlayMvvm.UserControls"
+             xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM"
+             xmlns:model="clr-namespace:PoeOverlayMvvm.Model"
+             xmlns:converters="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Converters"
+             xmlns:designer="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Designer"
+             xmlns:commands="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Commands"
+             mc:Ignorable="d" 
+             Name="ItemSearchesPanel"
+             d:DesignHeight="1200"
+             d:DesignWidth="324"
+             d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignViewModel}">
+    <StackPanel>
+        <StackPanel.Resources>
+            <Style TargetType="mvvm:BlankUserControl" BasedOn="{StaticResource ItemSearchesPanelElementStyle}"/>
+        </StackPanel.Resources>
+        <mvvm:BlankUserControl>
+            <TextBox Text="{Binding CurrentItemSearches}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding Source={x:Static commands:ItemSearchesPanelCommands.ProcessSearch}}">
+                            <i:InvokeCommandAction.CommandParameter>
+                                <MultiBinding Converter="{converters:ProcessSearchParametersConverter}">
+                                    <Binding Path="CurrentItemSearches"/>
+                                    <Binding ElementName="CurrentItemSearchesItemControl"/>
+                                    <Binding Source="{x:Static commands:ItemSearchesPanelCommands.ItemSearchMatchesSearchString}"/>
+                                </MultiBinding>
+                            </i:InvokeCommandAction.CommandParameter>
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+        </mvvm:BlankUserControl>
+        <ItemsControl Name="CurrentItemSearchesItemControl" ItemsSource="{Binding ItemConfiguration.CurrentItemSearches, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemSearchesItemsControlStyle}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:ItemSearchView/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <mvvm:BlankUserControl>
+            <ToggleButton IsChecked="{Binding ItemSearchesHistoryIsVisible}" Style="{StaticResource ItemSearchesHistoryToggleButtonStyle}">
+                <TextBlock>
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource ItemSearchesHistoryTextBlock}">
+                            <Setter Property="Text" Value="Show history"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
+                                    <Setter Property="Text" Value="Hide history"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </ToggleButton>
+        </mvvm:BlankUserControl>
+        <StackPanel Name="HistoryPanel" Visibility="{Binding ItemSearchesHistoryIsVisible, Converter={converters:BoolToVisibilityConverter}}">
+            <mvvm:BlankUserControl>
+                <TextBox></TextBox>
+            </mvvm:BlankUserControl>
+            <ItemsControl ItemsSource="{Binding ItemConfiguration.OldItemSearches, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemSearchesItemsControlStyle}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:ItemSearchView/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <mvvm:BlankUserControl>
+                <Button>
+                    <TextBlock Text="Clear history"/>
+                </Button>
+            </mvvm:BlankUserControl>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

@@ -18,7 +18,7 @@ namespace PoeOverlayMvvm.Logic
             while (true) {
                 var result = await _udpClient.ReceiveAsync();
 
-                Configuration.Current.ItemConfiguration.CurrentSearchItems.Add(
+                Configuration.Current.ItemConfiguration.CurrentItemSearches.Add(
                     JsonSerializerExtension.Serializer.DeserializeFromStream<ItemSearch>(
                         new MemoryStream(result.Buffer)));
             }

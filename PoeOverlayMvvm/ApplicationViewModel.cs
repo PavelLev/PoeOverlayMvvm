@@ -12,13 +12,10 @@ namespace PoeOverlayMvvm {
         }));
 
         public ApplicationViewModel() {
-            //without it designer throws exception
-            if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
-            {
-                Configuration.Load();
-            }
         }
 
+        public bool ItemSearchesHistoryIsVisible { get; set; } = false;
 
+        public string CurrentItemSearches { get; set; } = "";
     }
 }

@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:userControls="clr-namespace:PoeOverlayMvvm.UserControls">
+    <Style TargetType="TextBox" x:Key="ItemSearchNameTextBoxStyle" BasedOn="{StaticResource TextBoxStyle}">
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="BorderBrush" Value="#FFF0F0F0"/>
+    </Style>
+    <Style TargetType="userControls:ItemSearchView">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="#FFFA8327"/>
+    </Style>
+</ResourceDictionary>

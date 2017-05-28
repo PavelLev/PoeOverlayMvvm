@@ -109,7 +109,9 @@ namespace PoeOverlayMvvm.Model
 
             if (Buyout != null) {
                 whisperBuilder.Append(" listed for ")
-                    .Append(Buyout);
+                    .Append(Buyout.Quantity)
+                    .Append(" ")
+                    .Append(Buyout.CurrencyShortName);
             }
 
             whisperBuilder.Append(" in ")

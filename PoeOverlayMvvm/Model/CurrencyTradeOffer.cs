@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AngleSharp.Parser.Html;
-using HtmlAgilityPack;
 using PoeOverlayMvvm.Utility;
 
 namespace PoeOverlayMvvm.Model {
@@ -37,28 +36,6 @@ namespace PoeOverlayMvvm.Model {
                 .Cast<Match>()
                 .Select(match => new CurrencyTradeOffer(offeredCurrency, int.Parse(match.Groups[1].Value), requestedCurrency,
                     int.Parse(match.Groups[2].Value))).ToList();
-        }
-
-        private static async Task<IEnumerable<CurrencyTradeOffer>> GetTradeOffersMix(Currency offeredCurrency,
-            Currency requestedCurrency) {
-            var url = $"{Configuration.Current.CurrencyConfiguration.CurrencyDomain}/search?league={Configuration.Current.LeagueName}&online=x&want={offeredCurrency.Id}&have={requestedCurrency.Id}";
-            var pageString = await MyHttpClient.GetStringAsync(url);
-
-            var document = new HtmlDocument();
-            document.LoadHtml(pageString);
-
-            return document.DocumentNode
-                .Descendants("div")
-                .Where(node => node.Attributes.Contains("class") &&
-                               node.Attributes["class"].Value == "displayoffer-middle")
-                .Select(node => {
-                    var index = node.InnerText.IndexOf(" ");
-                    return new CurrencyTradeOffer(offeredCurrency,
-                        double.Parse(node.InnerText.Substring(0, index)),
-                        requestedCurrency,
-                        double.Parse(node.InnerText.Substring(index + 8)));
-                });
-
         }
 
         private static async Task<IEnumerable<CurrencyTradeOffer>> GetTradeOffersAngleSharp(Currency offeredCurrency,

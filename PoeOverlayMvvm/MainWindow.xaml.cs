@@ -30,16 +30,25 @@ namespace PoeOverlayMvvm {
 
             _targetTitles.Add(Title);
 
-            EventManager.RegisterClassHandler(typeof(TextBox), TextBox.TextChangedEvent, new RoutedEventHandler((sender, eventArgs) => {
-                if (!_textBoxDelayTimers.ContainsKey(sender)) {
-                    _textBoxDelayTimers[sender] = new Timer(state => {
-                        Dispatcher.Invoke(((TextBox)state).GetBindingExpression(TextBox.TextProperty)
-                            .UpdateSource);
-                    }, sender, Timeout.Infinite, Timeout.Infinite);
-                }
+            EventManager.RegisterClassHandler(typeof(TextBox), TextBox.TextChangedEvent, new RoutedEventHandler(
+                (sender, eventArgs) => {
+                    if (!_textBoxDelayTimers.ContainsKey(sender)) {
+                        _textBoxDelayTimers[sender] = new Timer(state => {
+                            Dispatcher.Invoke(((TextBox) state).GetBindingExpression(TextBox.TextProperty)
+                                .UpdateSource);
+                        }, sender, Timeout.Infinite, Timeout.Infinite);
+                    }
 
-                _textBoxDelayTimers[sender].Change(Configuration.Current.TextBoxDelay, Timeout.Infinite);
-            }));
+                    _textBoxDelayTimers[sender].Change(Configuration.Current.TextBoxDelay, Timeout.Infinite);
+                }));
+            
+            EventManager.RegisterClassHandler(typeof(TextBox), TextBox.KeyUpEvent, new KeyEventHandler(
+                (sender, args) => {
+                    if (args.Key == Key.Enter) {
+                        Dispatcher.Invoke(((TextBox)sender).GetBindingExpression(TextBox.TextProperty)
+                            .UpdateSource);
+                    }
+                }));
 
         }
 

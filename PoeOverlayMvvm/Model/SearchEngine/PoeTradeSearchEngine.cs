@@ -24,7 +24,7 @@ namespace PoeOverlayMvvm.Model.SearchEngine
         private int PostId { get; set; } = -1;
         private WebSocket WebSocketInstance { get; set; }
         
-        public void Search() {
+        public void Initialize() {
             WebSocketInstance = new WebSocket(WebSocketUrl);
             WebSocketInstance.OnMessage += async (sender, messageEventArgs) => {
                 var postResponse = await Post();
@@ -39,8 +39,16 @@ namespace PoeOverlayMvvm.Model.SearchEngine
             });
         }
 
-        private async Task<PostResponse> Post()
-        {
+        public void Start() {
+            WebSocketInstance.Connect();
+        }
+
+        public void Stop() {
+            WebSocketInstance.Close();
+            PostId = -1;
+        }
+
+        private async Task<PostResponse> Post() {
             return JsonSerializerExtension.Serializer.DeserializeFromStream<PostResponse>(await (await MyHttpClient.PostAsync(
                 PostUrl, new FormUrlEncodedContent(
                     new Dictionary<string, string> {
