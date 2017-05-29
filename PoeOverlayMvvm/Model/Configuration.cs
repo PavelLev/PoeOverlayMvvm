@@ -21,7 +21,7 @@ namespace PoeOverlayMvvm.Model {
             }
 
             if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime) {
-                _path = "N:\\PoE\\projects\\PoeOverlayMvvm\\PoeOverlayMvvm\\designerConfiguration.json";
+                _path = "D:\\PoE\\projects\\PoeOverlayMvvm\\PoeOverlayMvvm\\designerConfiguration.json";
             }
 
             Current = JsonSerializerExtension.Serializer.DeserializeFromFile<Configuration>(_path);

@@ -108,7 +108,6 @@
     <Compile Include="UserControls\ItemSearchesPanelView.xaml.cs">
       <DependentUpon>ItemSearchesPanelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utility\MVVM\CommandParameters\ProcessSearchParameters.cs" />
     <Compile Include="Utility\MVVM\Commands\ItemSearchCommands.cs" />
     <Compile Include="UserControls\ItemSearchView.xaml.cs">
       <DependentUpon>ItemSearchView.xaml</DependentUpon>
@@ -120,13 +119,14 @@
     <Compile Include="Utility\MVVM\BlankUserControl.xaml.cs">
       <DependentUpon>BlankUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utility\MVVM\Commands\ItemSearchesPanelCommands.cs" />
     <Compile Include="Utility\MVVM\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Utility\MVVM\Converters\MultiConverterChain.cs" />
+    <Compile Include="Utility\MVVM\Converters\ConverterChain.cs" />
     <Compile Include="Utility\MVVM\Converters\ElementInIListConverter.cs" />
     <Compile Include="Utility\MVVM\Converters\MultiplyConverter.cs" />
     <Compile Include="Utility\JsonSerializerExtension.cs" />
     <Compile Include="Utility\MVVM\Converters\ObserverIntervalConverter.cs" />
-    <Compile Include="Utility\MVVM\Converters\ProcessSearchParametersConverter.cs" />
+    <Compile Include="Utility\MVVM\Converters\StringContainsStringConverter.cs" />
     <Compile Include="Utility\MVVM\Designer\DesignerDataContextObjects.cs" />
     <Compile Include="Utility\MVVM\Designer\DesignerSearchEngine.cs" />
     <Compile Include="Utility\MyHttpClient.cs" />
@@ -235,6 +235,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utility\MVVM\CommandParameters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

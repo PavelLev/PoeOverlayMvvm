@@ -20,26 +20,25 @@
             <Style TargetType="mvvm:BlankUserControl" BasedOn="{StaticResource ItemSearchesPanelElementStyle}"/>
         </StackPanel.Resources>
         <mvvm:BlankUserControl>
-            <TextBox Text="{Binding CurrentItemSearches}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="TextChanged">
-                        <i:InvokeCommandAction Command="{Binding Source={x:Static commands:ItemSearchesPanelCommands.ProcessSearch}}">
-                            <i:InvokeCommandAction.CommandParameter>
-                                <MultiBinding Converter="{converters:ProcessSearchParametersConverter}">
-                                    <Binding Path="CurrentItemSearches"/>
-                                    <Binding ElementName="CurrentItemSearchesItemControl"/>
-                                    <Binding Source="{x:Static commands:ItemSearchesPanelCommands.ItemSearchMatchesSearchString}"/>
-                                </MultiBinding>
-                            </i:InvokeCommandAction.CommandParameter>
-                        </i:InvokeCommandAction>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBox>
+            <TextBox Text="{Binding CurrentItemSearchesFilter}"/>
         </mvvm:BlankUserControl>
         <ItemsControl Name="CurrentItemSearchesItemControl" ItemsSource="{Binding ItemConfiguration.CurrentItemSearches, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemSearchesItemsControlStyle}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <local:ItemSearchView/>
+                    <local:ItemSearchView>
+                        <local:ItemSearchView.Visibility>
+                            <MultiBinding>
+                                <MultiBinding.Converter>
+                                    <converters:MultiConverterChain>
+                                        <converters:StringContainsStringConverter/>
+                                        <BooleanToVisibilityConverter/>
+                                    </converters:MultiConverterChain>
+                                </MultiBinding.Converter>
+                                <Binding Path="Name"/>
+                                <Binding Path="DataContext.CurrentItemSearchesFilter" ElementName="ItemSearchesPanel"/>
+                            </MultiBinding>
+                        </local:ItemSearchView.Visibility>
+                    </local:ItemSearchView>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
@@ -61,12 +60,25 @@
         </mvvm:BlankUserControl>
         <StackPanel Name="HistoryPanel" Visibility="{Binding ItemSearchesHistoryIsVisible, Converter={converters:BoolToVisibilityConverter}}">
             <mvvm:BlankUserControl>
-                <TextBox></TextBox>
+                <TextBox Text="{Binding OldItemSearchesFilter}"/>
             </mvvm:BlankUserControl>
             <ItemsControl ItemsSource="{Binding ItemConfiguration.OldItemSearches, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemSearchesItemsControlStyle}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:ItemSearchView/>
+                        <local:ItemSearchView>
+                            <local:ItemSearchView.Visibility>
+                                <MultiBinding>
+                                    <MultiBinding.Converter>
+                                        <converters:MultiConverterChain>
+                                            <converters:StringContainsStringConverter/>
+                                            <BooleanToVisibilityConverter/>
+                                        </converters:MultiConverterChain>
+                                    </MultiBinding.Converter>
+                                    <Binding Path="Name"/>
+                                    <Binding Path="DataContext.OldItemSearchesFilter" ElementName="ItemSearchesPanel"/>
+                                </MultiBinding>
+                            </local:ItemSearchView.Visibility>
+                        </local:ItemSearchView>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

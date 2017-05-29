@@ -31,7 +31,7 @@ namespace PoeOverlayMvvm {
             _targetTitles.Add(Title);
 
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.TextChangedEvent, new RoutedEventHandler(
-                (sender, eventArgs) => {
+                (sender, routedEventArgs) => {
                     if (!_textBoxDelayTimers.ContainsKey(sender)) {
                         _textBoxDelayTimers[sender] = new Timer(state => {
                             Dispatcher.Invoke(((TextBox) state).GetBindingExpression(TextBox.TextProperty)
@@ -43,8 +43,8 @@ namespace PoeOverlayMvvm {
                 }));
             
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.KeyUpEvent, new KeyEventHandler(
-                (sender, args) => {
-                    if (args.Key == Key.Enter) {
+                (sender, keyEventArgs) => {
+                    if (keyEventArgs.Key == Key.Enter) {
                         Dispatcher.Invoke(((TextBox)sender).GetBindingExpression(TextBox.TextProperty)
                             .UpdateSource);
                     }

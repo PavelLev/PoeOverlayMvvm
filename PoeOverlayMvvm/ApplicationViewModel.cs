@@ -6,6 +6,9 @@ using PoeOverlayMvvm.Utility.MVVM;
 namespace PoeOverlayMvvm {
     public sealed class ApplicationViewModel: MyObservable {
         private RelayCommand _testCommand;
+        private bool _itemSearchesHistoryIsVisible = true;
+        private string _currentItemSearchesFilter = "1";
+        private string _oldItemSearchesFilter = "12";
 
         public RelayCommand TestCommand => _testCommand ?? (_testCommand = new RelayCommand(parameter => {
             
@@ -14,8 +17,19 @@ namespace PoeOverlayMvvm {
         public ApplicationViewModel() {
         }
 
-        public bool ItemSearchesHistoryIsVisible { get; set; } = false;
+        public bool ItemSearchesHistoryIsVisible {
+            get => _itemSearchesHistoryIsVisible;
+            set => SetField(ref _itemSearchesHistoryIsVisible, value);
+        }
 
-        public string CurrentItemSearches { get; set; } = "";
+        public string CurrentItemSearchesFilter {
+            get => _currentItemSearchesFilter;
+            set => SetField(ref _currentItemSearchesFilter, value);
+        }
+
+        public string OldItemSearchesFilter {
+            get => _oldItemSearchesFilter;
+            set => SetField(ref _oldItemSearchesFilter, value);
+        }
     }
 }
