@@ -119,7 +119,6 @@
     <Compile Include="Utility\MVVM\BlankUserControl.xaml.cs">
       <DependentUpon>BlankUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utility\MVVM\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Utility\MVVM\Converters\MultiConverterChain.cs" />
     <Compile Include="Utility\MVVM\Converters\ConverterChain.cs" />
     <Compile Include="Utility\MVVM\Converters\ElementInIListConverter.cs" />
@@ -135,6 +134,7 @@
     <Compile Include="Utility\PoeInteractionAutomation.cs" />
     <Compile Include="Utility\TaskExtension.cs" />
     <Compile Include="Utility\WinApi.cs" />
+    <Compile Include="ViewModels\ItemSearchesPanel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

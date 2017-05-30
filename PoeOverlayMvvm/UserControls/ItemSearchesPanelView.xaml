@@ -14,7 +14,7 @@
              Name="ItemSearchesPanel"
              d:DesignHeight="1200"
              d:DesignWidth="324"
-             d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignViewModel}">
+             d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignItemSearchesPanel}">
     <StackPanel>
         <StackPanel.Resources>
             <Style TargetType="mvvm:BlankUserControl" BasedOn="{StaticResource ItemSearchesPanelElementStyle}"/>
@@ -27,13 +27,7 @@
                 <DataTemplate>
                     <local:ItemSearchView>
                         <local:ItemSearchView.Visibility>
-                            <MultiBinding>
-                                <MultiBinding.Converter>
-                                    <converters:MultiConverterChain>
-                                        <converters:StringContainsStringConverter/>
-                                        <BooleanToVisibilityConverter/>
-                                    </converters:MultiConverterChain>
-                                </MultiBinding.Converter>
+                            <MultiBinding Converter="{StaticResource StringContainsStringToVisibilityConverter}">
                                 <Binding Path="Name"/>
                                 <Binding Path="DataContext.CurrentItemSearchesFilter" ElementName="ItemSearchesPanel"/>
                             </MultiBinding>
@@ -47,7 +41,7 @@
                 <TextBlock>
                     <TextBlock.Style>
                         <Style TargetType="TextBlock" BasedOn="{StaticResource ItemSearchesHistoryTextBlock}">
-                            <Setter Property="Text" Value="Show history"></Setter>
+                            <Setter Property="Text" Value="Show history"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
                                     <Setter Property="Text" Value="Hide history"/>
@@ -58,7 +52,7 @@
                 </TextBlock>
             </ToggleButton>
         </mvvm:BlankUserControl>
-        <StackPanel Name="HistoryPanel" Visibility="{Binding ItemSearchesHistoryIsVisible, Converter={converters:BoolToVisibilityConverter}}">
+        <StackPanel Name="HistoryPanel" Visibility="{Binding ItemSearchesHistoryIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <mvvm:BlankUserControl>
                 <TextBox Text="{Binding OldItemSearchesFilter}"/>
             </mvvm:BlankUserControl>
@@ -67,13 +61,7 @@
                     <DataTemplate>
                         <local:ItemSearchView>
                             <local:ItemSearchView.Visibility>
-                                <MultiBinding>
-                                    <MultiBinding.Converter>
-                                        <converters:MultiConverterChain>
-                                            <converters:StringContainsStringConverter/>
-                                            <BooleanToVisibilityConverter/>
-                                        </converters:MultiConverterChain>
-                                    </MultiBinding.Converter>
+                                <MultiBinding Converter="{StaticResource StringContainsStringToVisibilityConverter}">
                                     <Binding Path="Name"/>
                                     <Binding Path="DataContext.OldItemSearchesFilter" ElementName="ItemSearchesPanel"/>
                                 </MultiBinding>

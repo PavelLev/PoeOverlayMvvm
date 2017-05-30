@@ -1,4 +1,5 @@
 ﻿{
+  "ShowOnOffer": true,
   "LeagueName": "Legacy",
   "TargetTitles": [ "Connecting...", "Allocating space...", "Checking resources...", "Path of Exile" ],
   "TextBoxDelay": 1500,

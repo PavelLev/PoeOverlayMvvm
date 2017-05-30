@@ -20,7 +20,7 @@
         d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignViewModel}">
     <Grid>
         <Grid x:Name="Hidable">
-            <userControls:ItemSearchesPanelView Style="{StaticResource ItemSearchesPanelStyle}"/>
+            <userControls:ItemSearchesPanelView DataContext="{Binding ItemSearchesPanel}" Style="{StaticResource ItemSearchesPanelStyle}"/>
         </Grid>
         
         <StackPanel Name="MainMenu" Style="{StaticResource MainMenuStyle}">

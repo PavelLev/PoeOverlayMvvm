@@ -1,6 +1,7 @@
 ﻿using PoeOverlayMvvm.Model;
 using PoeOverlayMvvm.Model.ItemData;
 using PoeOverlayMvvm.Model.SearchEngine;
+using PoeOverlayMvvm.ViewModels;
 
 namespace PoeOverlayMvvm.Utility.MVVM.Designer {
     public static class DesignerDataContextObjects {
@@ -10,7 +11,14 @@ namespace PoeOverlayMvvm.Utility.MVVM.Designer {
         public static ItemSearch DesignItemSearch { get; } =
             new ItemSearch("Test ItemObserver", new DesignerSearchEngine(), DesignPrice, true);
 
+        public static ItemSearchesPanel DesignItemSearchesPanel { get; } =
+            new ItemSearchesPanel {
+                ItemSearchesHistoryIsVisible = true,
+                CurrentItemSearchesFilter = "1",
+                OldItemSearchesFilter = "12"
+            };
+
         public static ApplicationViewModel DesignViewModel { get; } =
-            new ApplicationViewModel {ItemSearchesHistoryIsVisible = false};
+            new ApplicationViewModel {ItemSearchesPanel = DesignItemSearchesPanel};
     }
 }

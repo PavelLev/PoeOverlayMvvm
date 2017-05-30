@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM"
-                    xmlns:converters="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Converters">
+                    xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM">
 
     <Style TargetType="FrameworkElement" BasedOn="{StaticResource SidePanelStyle}" x:Key="ItemSearchesPanelStyle">
         <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -11,7 +10,7 @@
         <Setter Property="Height" Value="{Binding
                 Path=Height,
                 ElementName=ItemSearchesPanel,
-                Converter={converters:MultiplyConverter},
+                Converter={StaticResource MultiplyConverter},
                 ConverterParameter=0.03}"/>
     </Style>
     
@@ -19,7 +18,7 @@
         <Setter Property="MaxHeight" Value="{Binding
                 Path=Height,
                 ElementName=ItemSearchesPanel,
-                Converter={converters:MultiplyConverter},
+                Converter={StaticResource MultiplyConverter},
                 ConverterParameter=0.47}"/>
     </Style>
 
@@ -27,7 +26,7 @@
         <Setter Property="MaxHeight" Value="{Binding
                 Path=Height,
                 ElementName=ItemSearchesPanel,
-                Converter={converters:MultiplyConverter},
+                Converter={StaticResource MultiplyConverter},
                 ConverterParameter=0.44}"/>
     </Style>
 

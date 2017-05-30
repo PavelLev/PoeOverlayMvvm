@@ -32,11 +32,11 @@
                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mvvm:BlankUserControl}}"/>
         <Setter Property="FontSize" Value="{Binding Height,
                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mvvm:BlankUserControl},
-                Converter={converters:MultiplyConverter}, 
+                Converter={StaticResource MultiplyConverter}, 
                 ConverterParameter=0.5}"/>
         <Setter Property="Padding" Value="{Binding Height,
                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mvvm:BlankUserControl},
-                Converter={converters:MultiplyConverter},
+                Converter={StaticResource MultiplyConverter},
                 ConverterParameter=0.1}"/>
     </Style>
     <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}"/>
@@ -44,11 +44,11 @@
     <Style TargetType="TextBox" x:Key="TextBoxStyle">
         <Setter Property="FontSize" Value="{Binding Height,
                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mvvm:BlankUserControl},
-                Converter={converters:MultiplyConverter}, 
+                Converter={StaticResource MultiplyConverter}, 
                 ConverterParameter=0.5}"/>
         <Setter Property="Padding" Value="{Binding Height,
                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mvvm:BlankUserControl},
-                Converter={converters:MultiplyConverter},
+                Converter={StaticResource MultiplyConverter},
                 ConverterParameter=0.1}"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
@@ -57,11 +57,11 @@
     <Style TargetType="ComboBox">
         <Setter Property="FontSize" Value="{Binding Height,
                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mvvm:BlankUserControl},
-                Converter={converters:MultiplyConverter}, 
+                Converter={StaticResource MultiplyConverter}, 
                 ConverterParameter=0.5}"/>
         <Setter Property="Padding" Value="{Binding Height,
                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mvvm:BlankUserControl},
-                Converter={converters:MultiplyConverter},
+                Converter={StaticResource MultiplyConverter},
                 ConverterParameter=0.1}"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>

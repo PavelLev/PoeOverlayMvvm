@@ -32,7 +32,7 @@
                             <Style.Triggers>
                                 <DataTrigger Value="True">
                                     <DataTrigger.Binding>
-                                        <MultiBinding Converter="{converters:ElementInIListConverter}">
+                                        <MultiBinding Converter="{StaticResource ElementInIListConverter}">
                                             <Binding/>
                                             <Binding Path="ItemConfiguration.CurrentItemSearches" Source="{x:Static model:Configuration.Current}"/>
                                         </MultiBinding>
@@ -46,7 +46,7 @@
                                 </DataTrigger>
                                 <DataTrigger Value="True">
                                     <DataTrigger.Binding>
-                                        <MultiBinding Converter="{converters:ElementInIListConverter}">
+                                        <MultiBinding Converter="{StaticResource ElementInIListConverter}">
                                             <Binding/>
                                             <Binding Path="ItemConfiguration.OldItemSearches" Source="{x:Static model:Configuration.Current}"/>
                                         </MultiBinding>
