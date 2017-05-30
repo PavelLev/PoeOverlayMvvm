@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AngleSharp.Parser.Html;
-using PoeOverlayMvvm.Model;
 using PoeOverlayMvvm.Model.ItemData;
 
-namespace PoeOverlayMvvm.Utility
+namespace PoeOverlayMvvm.Model.SearchEngine
 {
     public static class OfferedItemsHtmlParser
     {
@@ -80,30 +78,21 @@ namespace PoeOverlayMvvm.Utility
                             return modifier;
                         })
                         .ToList();
+                    
 
+                    var socketLinksText = node.QuerySelector("span.sockets-raw").TextContent;
+                    if (socketLinksText != "") {
+                        offeredItem.SocketLinks = socketLinksText.Split(new[] { ' ' })
+                            .Select(socketLinkText => {
+                                var socketLink = new SocketLink();
 
-                    var socketLinksNode = node.QuerySelector("div.sockets-inner");
-                    if (socketLinksNode?.Children?.Length > 0) {
-                        offeredItem.SocketLinks = new List<SocketLink>();
+                                foreach (var socketText in socketLinkText.Split(new[] { '-' })) {
+                                    socketLink.AddSocketByText(socketText);
+                                }
 
-                        var socketLink = new SocketLink();
-                        AddSocketByClass(socketLink, socketLinksNode.Children[0].ClassList[1]);
-
-                        var i = 1;
-                        while (i < socketLinksNode.Children.Length) {
-                            var nextNode = socketLinksNode.Children[i];
-                            if (nextNode.ClassList[0] == "socket") {
-                                offeredItem.SocketLinks.Add(socketLink);
-                                socketLink = new SocketLink();
-                            }
-                            else {
-                                i++;
-                                nextNode = socketLinksNode.Children[i];
-                            }
-                            AddSocketByClass(socketLink, nextNode.ClassList[1]);
-                            i++;
-                        }
-                        offeredItem.SocketLinks.Add(socketLink);
+                                return socketLink;
+                            })
+                            .ToList();
                     }
 
                     return offeredItem;
@@ -111,20 +100,18 @@ namespace PoeOverlayMvvm.Utility
                 .ToList();
         }
 
-        private static void AddSocketByClass(SocketLink socketLink, string className)
-        {
-            switch (className)
-            {
-                case "socketD":
-                    socketLink.Green++;
-                    break;
-                case "socketS":
+        private static void AddSocketByText(this SocketLink socketLink, string color) {
+            switch (color) {
+                case "R":
                     socketLink.Red++;
                     break;
-                case "socketI":
+                case "G":
+                    socketLink.Green++;
+                    break;
+                case "B":
                     socketLink.Blue++;
                     break;
-                case "socketG":
+                case "W":
                     socketLink.White++;
                     break;
             }

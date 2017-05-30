@@ -20,5 +20,26 @@ namespace PoeOverlayMvvm.Utility.MVVM.Designer {
 
         public static ApplicationViewModel DesignViewModel { get; } =
             new ApplicationViewModel {ItemSearchesPanel = DesignItemSearchesPanel};
+
+        public static Item DesignHeraldOfAshItem { get; } = new Item {
+            Id = "dsafjqewurhiewdusfajl32747y",
+            Name = "Herald of Ash",
+            Buyout = DesignPrice,
+            SellerId = "Test Seller Account 1",
+            SellerAccountName = "Test Seller Account 1",
+            SellerCharacterName = "Test Seller Character 1",
+            StashTab = "sell 1",
+            StashX = 2,
+            StashY = 12,
+            GemLevel = "19",
+            Quality = "18",
+            RequiredLevel = "64",
+        };
+
+        //uncompleted
+        public static Item DesignDoomfletchPrismItem { get; } = new Item {
+            Id = "qwerewdsjfi3485324y9r9uwerjfij",
+            Name = "Doomfletch's Prism Royal Bow",
+        };
     }
 }

@@ -130,7 +130,7 @@
     <Compile Include="Utility\MVVM\Designer\DesignerSearchEngine.cs" />
     <Compile Include="Utility\MyHttpClient.cs" />
     <Compile Include="Utility\MVVM\RelayCommand.cs" />
-    <Compile Include="Utility\OfferedItemsHtmlParser.cs" />
+    <Compile Include="Model\SearchEngine\PoeTradeItemHtmlParser.cs" />
     <Compile Include="Utility\PoeInteractionAutomation.cs" />
     <Compile Include="Utility\TaskExtension.cs" />
     <Compile Include="Utility\WinApi.cs" />
