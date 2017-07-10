@@ -108,6 +108,12 @@
     <Compile Include="UserControls\ItemSearchesPanelView.xaml.cs">
       <DependentUpon>ItemSearchesPanelView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ItemsPanelView.xaml.cs">
+      <DependentUpon>ItemsPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ItemView.xaml.cs">
+      <DependentUpon>ItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utility\MVVM\Commands\ItemSearchCommands.cs" />
     <Compile Include="UserControls\ItemSearchView.xaml.cs">
       <DependentUpon>ItemSearchView.xaml</DependentUpon>
@@ -126,6 +132,7 @@
     <Compile Include="Utility\JsonSerializerExtension.cs" />
     <Compile Include="Utility\MVVM\Converters\ObserverIntervalConverter.cs" />
     <Compile Include="Utility\MVVM\Converters\StringContainsStringConverter.cs" />
+    <Compile Include="Utility\MVVM\Converters\ThicknessFromTopConverter.cs" />
     <Compile Include="Utility\MVVM\Designer\DesignerDataContextObjects.cs" />
     <Compile Include="Utility\MVVM\Designer\DesignerSearchEngine.cs" />
     <Compile Include="Utility\MyHttpClient.cs" />
@@ -135,6 +142,7 @@
     <Compile Include="Utility\TaskExtension.cs" />
     <Compile Include="Utility\WinApi.cs" />
     <Compile Include="ViewModels\ItemSearchesPanel.cs" />
+    <Compile Include="ViewModels\ItemsPanel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -148,23 +156,31 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Style\ItemSearchesPanelStyle.xaml">
+    <Page Include="ResourceDictionaries\ConvertersResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Style\ItemSearchStyle.xaml">
+    <Page Include="ResourceDictionaries\ItemsPanelStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResourceDictionaries\ItemSearchesPanelStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Style\MainMenuStyle.xaml">
+    <Page Include="ResourceDictionaries\ItemSearchStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Style\MainWindowStyle.xaml">
+    <Page Include="ResourceDictionaries\ItemStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Style\SidePanelStyle.xaml">
+    <Page Include="ResourceDictionaries\MainMenuStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionaries\MainWindowStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,6 +189,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ItemSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ItemsPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,26 +6,17 @@
              Startup="App_OnStartup">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Style/MainWindowStyle.xaml"/>
-                <ResourceDictionary Source="Style/MainMenuStyle.xaml"/>
-                <ResourceDictionary Source="Style/SidePanelStyle.xaml"/>
-                <ResourceDictionary Source="Style/ItemSearchesPanelStyle.xaml"/>
-                <ResourceDictionary Source="Style/ItemSearchStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-
             <local:ApplicationViewModel x:Key="ApplicationViewModel"/>
 
-            <converters:ElementInIListConverter x:Key="ElementInIListConverter"/>
-            <converters:MultiplyConverter x:Key="MultiplyConverter"/>
-            <converters:ObserverIntervalConverter x:Key="ObserverIntervalConverter"/>
-            <converters:StringContainsStringConverter x:Key="StringContainsStringConverter"/>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            
-            <converters:MultiConverterChain x:Key="StringContainsStringToVisibilityConverter">
-                <StaticResource ResourceKey="StringContainsStringConverter"/>
-                <StaticResource ResourceKey="BooleanToVisibilityConverter"/>
-            </converters:MultiConverterChain>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionaries/ConvertersResourceDictionary.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/MainWindowStyle.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/MainMenuStyle.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/ItemSearchesPanelStyle.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/ItemSearchStyle.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/ItemsPanelStyle.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/ItemStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

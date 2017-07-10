@@ -9,7 +9,6 @@ namespace PoeOverlayMvvm.Model
     [JsonObject]
     public class Item {
         private string _whisper;
-        private Price _buyout;
 
         [JsonProperty]
         public string Id { get; set; }
@@ -19,13 +18,7 @@ namespace PoeOverlayMvvm.Model
         public string WikiLink { get; set; }
 
         [JsonProperty]
-        public Price Buyout {
-            get => _buyout;
-            set {
-                _buyout = value;
-                GenerateWhisper();
-            }
-        }
+        public Price Buyout { get; set; }
 
         [JsonProperty]
         public string SellerId { get; set; }
@@ -55,20 +48,13 @@ namespace PoeOverlayMvvm.Model
         [JsonProperty]
         public List<Modifier> Modifiers { get; set; }
 
-        public string Whisper {
-            get {
-                if (_whisper == null) {
-                    GenerateWhisper();
-                }
-                return _whisper;
-            }
-        }
+        public string Whisper => GenerateWhisper();
 
         public void SendWhisper() {
             PoeInteractionAutomation.SendChatMessage(Whisper);
         }
 
-        private void GenerateWhisper() {
+        private string GenerateWhisper() {
             // function from poe.trade for creating whisper message
             //function whisperMessage(o)
             //{
@@ -130,7 +116,7 @@ namespace PoeOverlayMvvm.Model
                 whisperBuilder.Append(")");
             }
 
-            _whisper = whisperBuilder.ToString();
+            return whisperBuilder.ToString();
         }
     }
 }

@@ -11,7 +11,7 @@
         <Setter Property="Height" Value="{Binding 
                 Path=Height, 
                 ElementName=Window,
-                Converter={converters:MultiplyConverter}, 
+                Converter={StaticResource MultiplyConverter}, 
                 ConverterParameter=0.03}"/>
     </Style>
 

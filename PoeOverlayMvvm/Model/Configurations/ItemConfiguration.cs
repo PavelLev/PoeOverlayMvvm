@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using PoeOverlayMvvm.Utility.MVVM.Designer;
 
 namespace PoeOverlayMvvm.Model.Configurations {
     [JsonObject]
@@ -10,11 +11,9 @@ namespace PoeOverlayMvvm.Model.Configurations {
 
         [JsonProperty]
         public ObservableCollection<ItemSearch> OldItemSearches { get; }
-
-        [JsonProperty]
+        
         public ObservableCollection<Item> CurrentItems { get; }
-
-        [JsonProperty]
+        
         public ObservableCollection<Item> OldItems { get; }
 
         [JsonConstructor]
@@ -25,8 +24,8 @@ namespace PoeOverlayMvvm.Model.Configurations {
                 currentSearchItem.SearchEngine.Start();
             }
             OldItemSearches = oldSearchItems ?? new ObservableCollection<ItemSearch>();
-            CurrentItems = currentOfferedItems ?? new ObservableCollection<Item>();
-            OldItems = oldOfferedItems ?? new ObservableCollection<Item>();
+            CurrentItems = new ObservableCollection<Item> {DesignerDataContextObjects.DesignHeraldOfAshItem, DesignerDataContextObjects.DesignDoomfletchPrismItem, DesignerDataContextObjects.BloodStrapCrystalBelt, DesignerDataContextObjects.BroodClaspCrystalBelt};
+            OldItems = new ObservableCollection<Item>();
         }
     }
 }

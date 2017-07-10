@@ -21,6 +21,7 @@
     <Grid>
         <Grid x:Name="Hidable">
             <userControls:ItemSearchesPanelView DataContext="{Binding ItemSearchesPanel}" Style="{StaticResource ItemSearchesPanelStyle}"/>
+            <userControls:ItemsPanelView DataContext="{Binding ItemsPanel}" Style="{StaticResource ItemsPanelStyle}"/>
         </Grid>
         
         <StackPanel Name="MainMenu" Style="{StaticResource MainMenuStyle}">

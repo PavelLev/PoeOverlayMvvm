@@ -1,46 +1,43 @@
-﻿<UserControl x:Class="PoeOverlayMvvm.UserControls.ItemSearchesPanelView"
+﻿<UserControl x:Class="PoeOverlayMvvm.UserControls.ItemsPanelView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:PoeOverlayMvvm.UserControls"
              xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM"
              xmlns:model="clr-namespace:PoeOverlayMvvm.Model"
-             xmlns:converters="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Converters"
              xmlns:designer="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Designer"
-             xmlns:commands="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Commands"
              mc:Ignorable="d" 
-             Name="ItemSearchesPanel"
+             Name="ItemsPanel"
              d:DesignHeight="1200"
              d:DesignWidth="300"
-             d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignItemSearchesPanel}">
+             d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignItemsPanel}">
     <StackPanel>
         <StackPanel.Resources>
-            <Style TargetType="mvvm:BlankUserControl" BasedOn="{StaticResource ItemSearchesPanelElementStyle}"/>
+            <Style TargetType="mvvm:BlankUserControl" BasedOn="{StaticResource ItemsPanelElementStyle}"/>
         </StackPanel.Resources>
         <mvvm:BlankUserControl>
-            <TextBox Text="{Binding CurrentItemSearchesFilter}"/>
+            <TextBox Text="{Binding CurrentItemsFilter}"/>
         </mvvm:BlankUserControl>
-        <ItemsControl Name="CurrentItemSearchesItemControl" ItemsSource="{Binding ItemConfiguration.CurrentItemSearches, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemSearchesItemsControlStyle}">
+        <ItemsControl Name="CurrentItemsItemsControl" ItemsSource="{Binding ItemConfiguration.CurrentItems, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemsItemsControlStyle}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <local:ItemSearchView>
-                        <local:ItemSearchView.Visibility>
+                    <local:ItemView>
+                        <local:ItemView.Visibility>
                             <MultiBinding Converter="{StaticResource StringContainsStringToVisibilityConverter}">
                                 <Binding Path="Name"/>
-                                <Binding Path="DataContext.CurrentItemSearchesFilter" ElementName="ItemSearchesPanel"/>
+                                <Binding Path="DataContext.CurrentItemsFilter" ElementName="ItemsPanel"/>
                             </MultiBinding>
-                        </local:ItemSearchView.Visibility>
-                    </local:ItemSearchView>
+                        </local:ItemView.Visibility>
+                    </local:ItemView>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         <mvvm:BlankUserControl>
-            <ToggleButton IsChecked="{Binding ItemSearchesHistoryIsVisible}" Style="{StaticResource ItemSearchesHistoryToggleButtonStyle}">
+            <ToggleButton IsChecked="{Binding ItemsHistoryIsVisible}" Style="{StaticResource ItemsHistoryToggleButtonStyle}">
                 <TextBlock>
                     <TextBlock.Style>
-                        <Style TargetType="TextBlock" BasedOn="{StaticResource ItemSearchesHistoryTextBlock}">
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource ItemsHistoryTextBlock}">
                             <Setter Property="Text" Value="Show history"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
@@ -52,21 +49,21 @@
                 </TextBlock>
             </ToggleButton>
         </mvvm:BlankUserControl>
-        <StackPanel Name="HistoryPanel" Visibility="{Binding ItemSearchesHistoryIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <StackPanel Name="HistoryPanel" Visibility="{Binding ItemsHistoryIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <mvvm:BlankUserControl>
-                <TextBox Text="{Binding OldItemSearchesFilter}"/>
+                <TextBox Text="{Binding OldItemsFilter}"/>
             </mvvm:BlankUserControl>
-            <ItemsControl ItemsSource="{Binding ItemConfiguration.OldItemSearches, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemSearchesItemsControlStyle}">
+            <ItemsControl ItemsSource="{Binding ItemConfiguration.OldItems, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemsItemsControlStyle}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:ItemSearchView>
-                            <local:ItemSearchView.Visibility>
+                        <local:ItemView>
+                            <local:ItemView.Visibility>
                                 <MultiBinding Converter="{StaticResource StringContainsStringToVisibilityConverter}">
                                     <Binding Path="Name"/>
-                                    <Binding Path="DataContext.OldItemSearchesFilter" ElementName="ItemSearchesPanel"/>
+                                    <Binding Path="DataContext.OldItemsFilter" ElementName="ItemsPanel"/>
                                 </MultiBinding>
-                            </local:ItemSearchView.Visibility>
-                        </local:ItemSearchView>
+                            </local:ItemView.Visibility>
+                        </local:ItemView>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

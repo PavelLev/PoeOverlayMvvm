@@ -39,11 +39,18 @@ namespace PoeOverlayMvvm.Model.SearchEngine
                     offeredItem.StashY = int.Parse(node.Attributes["data-y"].Value) + 1;
 
                     offeredItem.GemLevel = node.Attributes["data-level"]?.Value;
+                    if (offeredItem.GemLevel != null) {
+                        offeredItem.GemLevel = new StringBuilder("Gem level: ").Append(offeredItem.GemLevel).ToString();
+                    }
+
                     offeredItem.Quality =
                         node.Attributes["data-quality"]?.Value ?? node.QuerySelector("td[data-name='q']")
                             .TextContent;
                     if (offeredItem.Quality[0] == 160) {
                         offeredItem.Quality = null;
+                    }
+                    if (offeredItem.Quality != null) {
+                        offeredItem.Quality = new StringBuilder("Quality: ").Append(offeredItem.Quality).ToString();
                     }
 
                     offeredItem.RequiredLevel =

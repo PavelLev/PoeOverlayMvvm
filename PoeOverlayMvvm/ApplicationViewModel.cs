@@ -16,5 +16,6 @@ namespace PoeOverlayMvvm {
         }
 
         public ItemSearchesPanel ItemSearchesPanel { get; set; } = new ItemSearchesPanel();
+        public ItemsPanel ItemsPanel { get; set; } = new ItemsPanel();
     }
 }

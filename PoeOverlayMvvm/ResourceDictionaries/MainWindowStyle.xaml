@@ -42,10 +42,16 @@
     <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}"/>
     
     <Style TargetType="TextBox" x:Key="TextBoxStyle">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="">
+                <Setter Property="Padding" Value="0"></Setter>
+            </DataTrigger>
+        </Style.Triggers>
         <Setter Property="FontSize" Value="{Binding Height,
                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mvvm:BlankUserControl},
                 Converter={StaticResource MultiplyConverter}, 
                 ConverterParameter=0.5}"/>
+        
         <Setter Property="Padding" Value="{Binding Height,
                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mvvm:BlankUserControl},
                 Converter={StaticResource MultiplyConverter},
