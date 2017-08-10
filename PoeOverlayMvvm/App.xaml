@@ -12,10 +12,14 @@
                 <ResourceDictionary Source="ResourceDictionaries/ConvertersResourceDictionary.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/MainWindowStyle.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/MainMenuStyle.xaml"/>
+                
                 <ResourceDictionary Source="ResourceDictionaries/ItemSearchesPanelStyle.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/ItemSearchStyle.xaml"/>
+                
                 <ResourceDictionary Source="ResourceDictionaries/ItemsPanelStyle.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/ItemStyle.xaml"/>
+                
+                <ResourceDictionary Source="ResourceDictionaries/SocketLinkStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

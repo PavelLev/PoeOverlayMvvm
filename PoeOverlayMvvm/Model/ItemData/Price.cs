@@ -6,6 +6,7 @@ namespace PoeOverlayMvvm.Model.ItemData {
     [JsonObject]
     public class Price : MyObservable
     {
+        public static Price Empty { get; } = new Price();
         private double _quantity;
         private string _currencyShortName;
 
@@ -22,6 +23,9 @@ namespace PoeOverlayMvvm.Model.ItemData {
         }
 
         public double ApproximateValue => Quantity * Currency.ByShortName(CurrencyShortName).ApproximateValue;
-        
+
+        public bool IsEmpty() => Quantity <= 0 ||
+                                 !Configuration.Current.CurrencyConfiguration.PriceCurrencies.Contains(
+                                     CurrencyShortName);
     }
 }

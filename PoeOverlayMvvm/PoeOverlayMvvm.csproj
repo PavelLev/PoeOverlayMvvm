@@ -64,6 +64,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -114,6 +115,13 @@
     <Compile Include="UserControls\ItemView.xaml.cs">
       <DependentUpon>ItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SocketLinkView.xaml.cs">
+      <DependentUpon>SocketLinkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\HotKeyHandler.cs" />
+    <Compile Include="Utility\MVVM\Commands\ItemCommands.cs" />
+    <Compile Include="Utility\MVVM\Commands\ItemSearchesPanelCommands.cs" />
+    <Compile Include="Utility\MVVM\Commands\ItemsPanelCommands.cs" />
     <Compile Include="Utility\MVVM\Commands\ItemSearchCommands.cs" />
     <Compile Include="UserControls\ItemSearchView.xaml.cs">
       <DependentUpon>ItemSearchView.xaml</DependentUpon>
@@ -122,9 +130,6 @@
       <DependentUpon>PriceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utility\JsonConverters\SearchEngineJsonConverter.cs" />
-    <Compile Include="Utility\MVVM\BlankUserControl.xaml.cs">
-      <DependentUpon>BlankUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Utility\MVVM\Converters\MultiConverterChain.cs" />
     <Compile Include="Utility\MVVM\Converters\ConverterChain.cs" />
     <Compile Include="Utility\MVVM\Converters\ElementInIListConverter.cs" />
@@ -135,9 +140,11 @@
     <Compile Include="Utility\MVVM\Converters\ThicknessFromTopConverter.cs" />
     <Compile Include="Utility\MVVM\Designer\DesignerDataContextObjects.cs" />
     <Compile Include="Utility\MVVM\Designer\DesignerSearchEngine.cs" />
+    <Compile Include="Utility\MVVM\UIElementsSize.cs" />
     <Compile Include="Utility\MyHttpClient.cs" />
     <Compile Include="Utility\MVVM\RelayCommand.cs" />
     <Compile Include="Model\SearchEngine\PoeTradeItemHtmlParser.cs" />
+    <Compile Include="Utility\NotificationSoundPlayer.cs" />
     <Compile Include="Utility\PoeInteractionAutomation.cs" />
     <Compile Include="Utility\TaskExtension.cs" />
     <Compile Include="Utility\WinApi.cs" />
@@ -184,6 +191,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ResourceDictionaries\SocketLinkStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\ItemSearchesPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -204,11 +215,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\SidePanelControlTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Utility\MVVM\BlankUserControl.xaml">
+    <Page Include="UserControls\SocketLinkView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,21 +236,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Resources\configuration.json" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="designerConfiguration.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="configuration.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -262,6 +264,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utility\MVVM\CommandParameters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snd.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="PoeOverlayMvvm.UserControls.SocketLinkView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PoeOverlayMvvm.UserControls"
+             xmlns:designer="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Designer"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignSocketLink}"
+             Background="White">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel.Resources>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource SocketLinkTextBlockStyle}"/>
+        </StackPanel.Resources>
+        <TextBlock Text="{Binding Red}" Foreground="Red"/>
+        <TextBlock Text="{Binding Green}" Foreground="Green"/>
+        <TextBlock Text="{Binding Blue}" Foreground="Blue"/>
+        <TextBlock Text="{Binding White}" Foreground="White" Background="Black"/>
+    </StackPanel>
+</UserControl>

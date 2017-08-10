@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -28,20 +29,10 @@ namespace PoeOverlayMvvm.Model {
             return GetTradeOffersAngleSharp(offeredCurrency, requestedCurrency);
         }
 
-        private static async Task<IEnumerable<CurrencyTradeOffer>> GetTradeOffersRegex(Currency offeredCurrency, Currency requestedCurrency) {
-            var url = $"{Configuration.Current.CurrencyConfiguration.CurrencyDomain}/search?league={Configuration.Current.LeagueName}&online=x&want={offeredCurrency.Id}&have={requestedCurrency.Id}";
-            var pageString = await MyHttpClient.GetStringAsync(url);
-
-            return OfferRegex.Matches(pageString)
-                .Cast<Match>()
-                .Select(match => new CurrencyTradeOffer(offeredCurrency, int.Parse(match.Groups[1].Value), requestedCurrency,
-                    int.Parse(match.Groups[2].Value))).ToList();
-        }
-
         private static async Task<IEnumerable<CurrencyTradeOffer>> GetTradeOffersAngleSharp(Currency offeredCurrency,
             Currency requestedCurrency)
         {
-            var url = $"{Configuration.Current.CurrencyConfiguration.CurrencyDomain}/search?league={Configuration.Current.LeagueName}&online=x&want={offeredCurrency.Id}&have={requestedCurrency.Id}";
+            var url = GeneratePoeTradeUrl(offeredCurrency.Id, requestedCurrency.Id);
             
 
             var document = await htmlParser.ParseAsync(await MyHttpClient.GetStreamAsync(url));
@@ -55,6 +46,11 @@ namespace PoeOverlayMvvm.Model {
                         requestedCurrency,
                         double.Parse(node.TextContent.Substring(index + 3)));
                 });
+        }
+
+        private static string GeneratePoeTradeUrl(int offeredCurrencyId, int requestedCurrencyId) {
+            //spaces in LeagueName must be replaced with pluses
+            return $"{Configuration.Current.CurrencyConfiguration.CurrencyDomain}/search?league={Configuration.Current.LeagueName.Replace(' ', '+')}&online=x&want={offeredCurrencyId}&have={requestedCurrencyId}";
         }
     }
 }

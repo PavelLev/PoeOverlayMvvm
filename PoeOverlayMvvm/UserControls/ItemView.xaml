@@ -6,23 +6,96 @@
              xmlns:local="clr-namespace:PoeOverlayMvvm.UserControls"
              xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM"
              xmlns:designer="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Designer"
+             xmlns:model="clr-namespace:PoeOverlayMvvm.Model"
+             xmlns:commandsAndConverters="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Commands"
              mc:Ignorable="d" 
              Background="White"
-             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignDoomfletchPrismItem}">
+             d:DesignHeight="300" d:DesignWidth="400" d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignDoomfletchPrismItem}">
     <StackPanel>
-        <mvvm:BlankUserControl>
-            <TextBlock Text="{Binding Name}"/>
-        </mvvm:BlankUserControl>
-        <mvvm:BlankUserControl>
-            <TextBlock Text="{Binding SellerAccountName}"/>
-        </mvvm:BlankUserControl>
-        <mvvm:BlankUserControl>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding ItemLevel}"/>
-                <TextBlock Text="{Binding RequiredLevel}"/>
-                <TextBlock Text="{Binding GemLevel}"/>
-                <TextBlock Text="{Binding Quality}"/>
-            </StackPanel>
-        </mvvm:BlankUserControl>
+        <TextBlock Text="{Binding Name}"/>
+        <TextBlock Text="{Binding SellerAccountName}"/>
+        <local:PriceView DataContext="{Binding Buyout}"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding ItemLevel}"/>
+            <TextBlock Text="{Binding RequiredLevel}"/>
+            <TextBlock Text="{Binding GemLevel}"/>
+            <TextBlock Text="{Binding Quality}"/>
+            <ItemsControl ItemsSource="{Binding SocketLinks}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="+">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <local:SocketLinkView/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+        <ItemsControl ItemsSource="{Binding Modifiers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" ToolTip="{Binding FullTier}">
+                        <TextBlock Text="{Binding ShortTier}"/>
+                        <TextBlock Text="{Binding Value}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Grid>
+            <Button HorizontalAlignment="Left" Command="{x:Static commandsAndConverters:ItemCommands.Whisper}" CommandParameter="{Binding}">
+                <TextBlock Text="Whisper" />
+            </Button>
+            <Button CommandParameter="{Binding}" HorizontalAlignment="Right">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+                        <Style.Triggers>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource ElementInIListConverter}">
+                                        <Binding/>
+                                        <Binding Path="ItemConfiguration.CurrentItems" Source="{x:Static model:Configuration.Current}"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <TextBlock Text="Remove"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Button.Command" Value="{x:Static commandsAndConverters:ItemCommands.MoveToOld}"/>
+                            </DataTrigger>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource ElementInIListConverter}">
+                                        <Binding/>
+                                        <Binding Path="ItemConfiguration.OldItems" Source="{x:Static model:Configuration.Current}"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <TextBlock Text="Restore"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Button.Command" Value="{x:Static commandsAndConverters:ItemCommands.MoveToCurrent}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
     </StackPanel>
 </UserControl>

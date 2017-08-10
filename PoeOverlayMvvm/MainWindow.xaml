@@ -8,6 +8,7 @@
         xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM"
         xmlns:userControls="clr-namespace:PoeOverlayMvvm.UserControls"
         xmlns:designer="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Designer"
+        xmlns:utility="clr-namespace:PoeOverlayMvvm.Utility"
         mc:Ignorable="d"
         Name="Window"
         Title="PoeOverlay"
@@ -18,34 +19,24 @@
         Closing="Window_Closing"
         Style="{StaticResource MainWindowStyle}"
         d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignViewModel}">
-    <Grid>
-        <Grid x:Name="Hidable">
+    <Grid Visibility="{Binding IsForeground, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid.Resources>
+            <ResourceDictionary Source="ResourceDictionaries/ItemSearchesPanelStyle.xaml"></ResourceDictionary>
+        </Grid.Resources>
+        <Grid Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <userControls:ItemSearchesPanelView DataContext="{Binding ItemSearchesPanel}" Style="{StaticResource ItemSearchesPanelStyle}"/>
             <userControls:ItemsPanelView DataContext="{Binding ItemsPanel}" Style="{StaticResource ItemsPanelStyle}"/>
         </Grid>
-        
+
         <StackPanel Name="MainMenu" Style="{StaticResource MainMenuStyle}">
-            <StackPanel.Resources>
-                <Style TargetType="mvvm:BlankUserControl" BasedOn="{StaticResource MainMenuContentControlStyle}"></Style>
-            </StackPanel.Resources>
-            <mvvm:BlankUserControl>
-                <ToggleButton IsChecked="{Binding ShowOnOffer, Source={x:Static model:Configuration.Current}}">
-                    <TextBlock Text="Show on offer"/>
-                </ToggleButton>
-            </mvvm:BlankUserControl>
+            <ToggleButton IsChecked="{Binding ShowOnOffer, Source={x:Static model:Configuration.Current}}">
+                <TextBlock Text="Show on offer"/>
+            </ToggleButton>
             <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-            <mvvm:BlankUserControl>
-                <TextBlock Text="Item offer"/>
-            </mvvm:BlankUserControl>
+            <TextBlock Text="Item offer"/>
             <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-            <mvvm:BlankUserControl>
-                <TextBlock Text="Currency offer"/>
-            </mvvm:BlankUserControl>
-            
-            
-            <Label>
-                <Button Content="Test" Click="ButtonBase_OnClick" FontSize="16"/>
-            </Label>
+            <TextBlock Text="Currency offer"/>
+            <ComboBox ItemsSource="{Binding LeagueNamesList}" SelectedItem="{Binding LeagueName, Source={x:Static model:Configuration.Current}}"/>
         </StackPanel>
     </Grid>
 </Window>

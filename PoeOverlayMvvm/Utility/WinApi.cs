@@ -5,6 +5,8 @@ using System.Text;
 namespace PoeOverlayMvvm.Utility {
     public static class WinApi {
 
+        public static IntPtr GameWindowHandle { get; set; } = IntPtr.Zero;
+
         public delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
 
         [DllImport("kernel32.dll")]
@@ -26,6 +28,9 @@ namespace PoeOverlayMvvm.Utility {
         
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         /// <summary>
         /// wrapper for GetWindowText, that returns string

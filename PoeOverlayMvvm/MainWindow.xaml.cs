@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -8,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using PoeOverlayMvvm.Model;
+using PoeOverlayMvvm.Utility;
 using static PoeOverlayMvvm.Utility.WinApi;
 
 namespace PoeOverlayMvvm {
@@ -32,6 +34,10 @@ namespace PoeOverlayMvvm {
 
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.TextChangedEvent, new RoutedEventHandler(
                 (sender, routedEventArgs) => {
+                    if (!((TextBox) sender).Name.EndsWith("DelayedTextBox")) {
+                        return;
+                    }
+
                     if (!_textBoxDelayTimers.ContainsKey(sender)) {
                         _textBoxDelayTimers[sender] = new Timer(state => {
                             Dispatcher.Invoke(((TextBox) state).GetBindingExpression(TextBox.TextProperty)
@@ -54,15 +60,24 @@ namespace PoeOverlayMvvm {
 
         public async void WindowsEventMethod(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime) {
             await Task.Delay(200);
-            var title = GetWindowTitle(GetForegroundWindow());
+
+            var windowHandle = GetForegroundWindow();
+            var title = GetWindowTitle(windowHandle);
 
             if (title == null) {
                 return;
             }
+
+            if (title == "Path of Exile" && GameWindowHandle == IntPtr.Zero) {
+                GameWindowHandle = windowHandle;
+            }
+
+
+            ((ApplicationViewModel)App.Current.Resources["ApplicationViewModel"]).IsForeground = _targetTitles.Any(targetTitle => title.StartsWith(targetTitle));
             
-            Visibility = _targetTitles.Any(targetTitle => title.StartsWith(targetTitle))
-                ? Visibility.Visible
-                : Visibility.Visible;
+            //Visibility = _targetTitles.Any(targetTitle => title.StartsWith(targetTitle))
+            //    ? Visibility.Visible
+            //    : Visibility.Visible;
         }
 
         private void Window_StateChanged(object sender, EventArgs e) {
@@ -82,17 +97,13 @@ namespace PoeOverlayMvvm {
                 return;
             }
             hwndSource.AddHook(WndProc);
-            
-            var result = RegisterHotKey(Handle, HotKeyId.Hide, KeyModifier.Shift | KeyModifier.NoRepeat, KeyInterop.VirtualKeyFromKey(Key.F2));
-            if (!result) {
-                MessageBox.Show("Can't register hide hotkey");
-                Application.Current.Shutdown();
-                return;
-            }
 
-            result = RegisterHotKey(Handle, HotKeyId.Close, KeyModifier.Alt | KeyModifier.NoRepeat, KeyInterop.VirtualKeyFromKey(Key.F2));
-            if (!result) {
-                MessageBox.Show("Can't register close hotkey");
+            foreach (var hotKey in HotKeyHandler.HotKeys) {
+                var result = RegisterHotKey(Handle, hotKey.Id, hotKey.KeyModifier, hotKey.Key);
+                if (result) {
+                    continue;
+                }
+                MessageBox.Show("Can't register \"" + hotKey.Name + "\" hotkey with error " + Marshal.GetLastWin32Error());
                 Application.Current.Shutdown();
                 return;
             }
@@ -109,8 +120,9 @@ namespace PoeOverlayMvvm {
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-            UnregisterHotKey(Handle, HotKeyId.Close);
-            UnregisterHotKey(Handle, HotKeyId.Hide);
+            foreach (var hotKey in HotKeyHandler.HotKeys) {
+                UnregisterHotKey(Handle, hotKey.Id);
+            }
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
@@ -118,20 +130,7 @@ namespace PoeOverlayMvvm {
                 case WmHotkey:
                     // wParam - hot key id
                     // lParam - high order - virtual key identifier of pressed key, low order - keymodifier
-                    switch ((HotKeyId)wParam) {
-                        case HotKeyId.Hide:
-                            //switch visibility
-                            //Log.Visibility = Log.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-                            break;
-                        case HotKeyId.Close:
-                            var condition = Visibility != Visibility.Visible;
-                            Close();
-                            if (condition) {
-                                MessageBox.Show("Closed");
-                            }
-                            break;
-
-                    }
+                    HotKeyHandler.HotKeys.First(hotKey => hotKey.Id == (int) wParam).Action();
                     handled = true;
                     break;
                 default:
@@ -143,19 +142,7 @@ namespace PoeOverlayMvvm {
         }
 
         private IntPtr Handle => new WindowInteropHelper(this).Handle;
-
-        public static bool RegisterHotKey(IntPtr windowHandle, HotKeyId hotKeyId, KeyModifier keyModifiers, int virtualKey) {
-            return Utility.WinApi.RegisterHotKey(windowHandle, (int) hotKeyId, keyModifiers, virtualKey);
-        }
-
-        public static bool UnregisterHotKey(IntPtr windowHandle, HotKeyId hotKeyId) {
-            return Utility.WinApi.UnregisterHotKey(windowHandle, (int)hotKeyId);
-        }
-
-        public enum HotKeyId {
-            Hide = 0,
-            Close = 1
-        }
+        
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
             (sender as Button).Content = TestTimeList.Count == 0 ? 0 : TestTimeList.Skip(TestTimeList.Count - 10).Average();

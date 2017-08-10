@@ -10,7 +10,7 @@ namespace PoeOverlayMvvm.Utility.MVVM.Designer {
             new Price {CurrencyShortName = "chaos", Quantity = -12};
 
         public static ItemSearch DesignItemSearch { get; } =
-            new ItemSearch("Test ItemObserver", new DesignerSearchEngine(), DesignPrice, true);
+            new ItemSearch("Test ItemObserver", new DesignerSearchEngine(), DesignPrice, true, true);
 
         public static ItemSearchesPanel DesignItemSearchesPanel { get; } =
             new ItemSearchesPanel {
@@ -26,7 +26,7 @@ namespace PoeOverlayMvvm.Utility.MVVM.Designer {
             };
 
         public static ApplicationViewModel DesignViewModel { get; } =
-            new ApplicationViewModel {ItemSearchesPanel = DesignItemSearchesPanel};
+            new ApplicationViewModel {ItemSearchesPanel = DesignItemSearchesPanel, IsForeground = true};
 
         public static Item DesignHeraldOfAshItem { get; } = new Item {
             Id = "dsafjqewurhiewdusfajl32747y",
@@ -42,8 +42,9 @@ namespace PoeOverlayMvvm.Utility.MVVM.Designer {
             Quality = "Quality: 18",
             RequiredLevel = "Level: 64",
         };
-        
-        public static Item DesignDoomfletchPrismItem { get; } = new Item {
+
+        public static Item DesignDoomfletchPrismItem { get; } = new Item
+        {
             Id = "qwerewdsjfi3485324y9r9uwerjfij",
             Name = "Doomfletch's Prism Royal Bow",
             WikiLink = "http://pathofexile.gamepedia.com/Doomfletch's Prism",
@@ -85,7 +86,8 @@ namespace PoeOverlayMvvm.Utility.MVVM.Designer {
             },
         };
 
-        public static Item BroodClaspCrystalBelt { get; } = new Item {
+        public static Item BroodClaspCrystalBelt { get; } = new Item
+        {
             Id = "wer23zsdye4rtgr5uy67978ijh",
             Name = "Brood Clasp Crystal Belt",
             Buyout = DesignPrice,
@@ -131,7 +133,8 @@ namespace PoeOverlayMvvm.Utility.MVVM.Designer {
             },
         };
 
-        public static Item BloodStrapCrystalBelt { get; } = new Item {
+        public static Item BloodStrapCrystalBelt { get; } = new Item
+        {
             Id = "uifhs78348sgjeirog09ik90io",
             Name = "Blood Strap Crystal Belt",
             Buyout = DesignPrice,
@@ -175,6 +178,22 @@ namespace PoeOverlayMvvm.Utility.MVVM.Designer {
                     Value = "crafted +25% to Fire Resistance",
                 },
             },
+        };
+
+        public static SocketLink DesignSocketLink { get; } = new SocketLink {
+            Red = 1,
+            Green = 1,
+            Blue = 1,
+            White = 1
+        };
+
+        public static List<SocketLink> Links { get; } = new List<SocketLink> {
+            new SocketLink {
+                Green = 2
+            },
+            new SocketLink {
+                Green = 1
+            }
         };
     }
 }

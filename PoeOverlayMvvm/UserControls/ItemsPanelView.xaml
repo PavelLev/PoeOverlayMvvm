@@ -7,19 +7,15 @@
              xmlns:mvvm="clr-namespace:PoeOverlayMvvm.Utility.MVVM"
              xmlns:model="clr-namespace:PoeOverlayMvvm.Model"
              xmlns:designer="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Designer"
+             xmlns:commands="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Commands"
              mc:Ignorable="d" 
              Name="ItemsPanel"
              d:DesignHeight="1200"
              d:DesignWidth="300"
              d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignItemsPanel}">
     <StackPanel>
-        <StackPanel.Resources>
-            <Style TargetType="mvvm:BlankUserControl" BasedOn="{StaticResource ItemsPanelElementStyle}"/>
-        </StackPanel.Resources>
-        <mvvm:BlankUserControl>
-            <TextBox Text="{Binding CurrentItemsFilter}"/>
-        </mvvm:BlankUserControl>
-        <ItemsControl Name="CurrentItemsItemsControl" ItemsSource="{Binding ItemConfiguration.CurrentItems, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemsItemsControlStyle}">
+        <TextBox Text="{Binding CurrentItemsFilter, UpdateSourceTrigger=PropertyChanged}"/>
+        <ItemsControl  Name="CurrentItemsItemsControl" ItemsSource="{Binding ItemConfiguration.CurrentItems, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemsItemsControlStyle}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <local:ItemView>
@@ -32,27 +28,30 @@
                     </local:ItemView>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <ScrollViewer PreviewMouseWheel="UIElement_OnMouseWheel" VerticalScrollBarVisibility="Hidden">
+                        <ItemsPresenter/>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
         </ItemsControl>
-        <mvvm:BlankUserControl>
-            <ToggleButton IsChecked="{Binding ItemsHistoryIsVisible}" Style="{StaticResource ItemsHistoryToggleButtonStyle}">
-                <TextBlock>
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock" BasedOn="{StaticResource ItemsHistoryTextBlock}">
-                            <Setter Property="Text" Value="Show history"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
-                                    <Setter Property="Text" Value="Hide history"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </ToggleButton>
-        </mvvm:BlankUserControl>
+        <ToggleButton IsChecked="{Binding ItemsHistoryIsVisible}" Style="{StaticResource ItemsHistoryToggleButtonStyle}">
+            <TextBlock>
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource ItemsHistoryTextBlock}">
+                        <Setter Property="Text" Value="Show history"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
+                                <Setter Property="Text" Value="Hide history"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </ToggleButton>
         <StackPanel Name="HistoryPanel" Visibility="{Binding ItemsHistoryIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <mvvm:BlankUserControl>
-                <TextBox Text="{Binding OldItemsFilter}"/>
-            </mvvm:BlankUserControl>
+            <TextBox Text="{Binding OldItemsFilter, UpdateSourceTrigger=PropertyChanged}"/>
             <ItemsControl ItemsSource="{Binding ItemConfiguration.OldItems, Source={x:Static model:Configuration.Current}}" Style="{StaticResource ItemsItemsControlStyle}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -66,12 +65,17 @@
                         </local:ItemView>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
+                <ItemsControl.Template>
+                    <ControlTemplate>
+                        <ScrollViewer PreviewMouseWheel="UIElement_OnMouseWheel" VerticalScrollBarVisibility="Hidden">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
             </ItemsControl>
-            <mvvm:BlankUserControl>
-                <Button>
-                    <TextBlock Text="Clear history"/>
-                </Button>
-            </mvvm:BlankUserControl>
+            <Button Command="{x:Static commands:ItemsPanelCommands.ClearHistory}">
+                <TextBlock Text="Clear history"/>
+            </Button>
         </StackPanel>
     </StackPanel>
 </UserControl>

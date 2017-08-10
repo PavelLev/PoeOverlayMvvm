@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Net.Sockets;
+using System.Text;
 using PoeOverlayMvvm.Model;
 using PoeOverlayMvvm.Utility;
 
@@ -16,11 +17,19 @@ namespace PoeOverlayMvvm.Logic
             _udpClient = new UdpClient(Port);
 
             while (true) {
-                var result = await _udpClient.ReceiveAsync();
+                // "poeoverlay:{...}
+                var url = Encoding.UTF8.GetString((await _udpClient.ReceiveAsync()).Buffer);
+                var result = url.Substring(url.IndexOf(':') + 1);
 
-                Configuration.Current.ItemConfiguration.CurrentItemSearches.Add(
-                    JsonSerializerExtension.Serializer.DeserializeFromStream<ItemSearch>(
-                        new MemoryStream(result.Buffer)));
+                // " replaced to @
+                result = result.Replace("@", "\"");
+
+                var itemSearch = JsonSerializerExtension.Serializer.DeserializeFromString<ItemSearch>(
+                    result);
+                
+                Configuration.Current.ItemConfiguration.CurrentItemSearches.Add(itemSearch);
+
+                itemSearch.SearchEngine.Start();
             }
         }
     }

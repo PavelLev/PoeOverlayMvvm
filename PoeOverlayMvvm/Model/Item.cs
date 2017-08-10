@@ -8,8 +8,6 @@ namespace PoeOverlayMvvm.Model
 {
     [JsonObject]
     public class Item {
-        private string _whisper;
-
         [JsonProperty]
         public string Id { get; set; }
         [JsonProperty]
@@ -51,6 +49,7 @@ namespace PoeOverlayMvvm.Model
         public string Whisper => GenerateWhisper();
 
         public void SendWhisper() {
+            WinApi.SetForegroundWindow(WinApi.GameWindowHandle);
             PoeInteractionAutomation.SendChatMessage(Whisper);
         }
 
@@ -93,7 +92,7 @@ namespace PoeOverlayMvvm.Model
 
             whisperBuilder.Append(Name);
 
-            if (Buyout != null) {
+            if (!Buyout.IsEmpty()) {
                 whisperBuilder.Append(" listed for ")
                     .Append(Buyout.Quantity)
                     .Append(" ")

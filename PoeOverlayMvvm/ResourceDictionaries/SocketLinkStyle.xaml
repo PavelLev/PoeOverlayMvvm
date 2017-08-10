@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}" x:Key="SocketLinkTextBlockStyle">
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Style.Triggers>
+            <DataTrigger Value="0">
+                <DataTrigger.Binding>
+                    <Binding Path="Text" RelativeSource="{RelativeSource Self}"></Binding>
+                </DataTrigger.Binding>
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

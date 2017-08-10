@@ -16,10 +16,15 @@ namespace PoeOverlayMvvm.Logic {
         public static void Load() {
             _updateTimer = new Timer(async state => {
                 var begin = DateTime.Now;
-                await UpdateAllCurrencies();
+                try {
+                    await UpdateAllCurrencies();
+                }
+                catch {
+                    //ignore
+                }
                 MainWindow.TestTimeList.Add((int) (DateTime.Now - begin).TotalMilliseconds);
                 //TODO get interval value from configuration
-                _updateTimer.Change(5 * 1000, Timeout.Infinite);
+                _updateTimer.Change(5 * 60 * 1000, Timeout.Infinite);
             }, null, 0, Timeout.Infinite);
         }
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PoeOverlayMvvm.Utility;
 
 namespace PoeOverlayMvvm.UserControls {
     /// <summary>
@@ -20,6 +21,12 @@ namespace PoeOverlayMvvm.UserControls {
     public partial class ItemsPanelView : UserControl {
         public ItemsPanelView() {
             InitializeComponent();
+        }
+
+        private void UIElement_OnMouseWheel(object sender, MouseWheelEventArgs e) {
+            var scrollViewer = (ScrollViewer)sender;
+            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
+            e.Handled = true;
         }
     }
 }

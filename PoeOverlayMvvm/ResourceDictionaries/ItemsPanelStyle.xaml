@@ -4,43 +4,21 @@
                     xmlns:converters="clr-namespace:PoeOverlayMvvm.Utility.MVVM.Converters">
 
     <Style TargetType="FrameworkElement" x:Key="ItemsPanelStyle">
-        <Setter Property="Width" Value="{Binding Height,
-                ElementName=Window, 
-                Converter={StaticResource MultiplyConverter},
-                ConverterParameter=0.25}"/>
-        <Setter Property="Height" Value="{Binding
-                Path=Height,
-                ElementName=Window}"/>
+        <Setter Property="Width" Value="{x:Static mvvm:ElementsSize.PanelWidth}"/>
+        <Setter Property="Height" Value="{x:Static mvvm:ElementsSize.WindowHeight}"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
 
-    <Style TargetType="mvvm:BlankUserControl" x:Key="ItemsPanelElementStyle">
-        <Setter Property="Height" Value="{Binding Height,
-                ElementName=ItemsPanel,
-                Converter={StaticResource MultiplyConverter},
-                ConverterParameter=0.03}"/>
-    </Style>
-
     <Style TargetType="ItemsControl" x:Key="ItemsItemsControlStyle">
-        <Setter Property="MaxHeight" Value="{Binding Height,
-                ElementName=ItemsPanel,
-                Converter={StaticResource MultiplyConverter},
-                ConverterParameter=0.44}"/>
+        <Setter Property="MaxHeight" Value="{x:Static mvvm:ElementsSize.PanelItemsControlMaxHeight}"/>
     </Style>
 
     <Style TargetType="ToggleButton" x:Key="ItemsHistoryToggleButtonStyle">
-        <Setter Property="BorderThickness" Value="{Binding Height,
-                ElementName=ItemsPanel,
-                Converter={StaticResource MultiplyConverter},
-                ConverterParameter=0.0025}"/>
+        <Setter Property="BorderThickness" Value="{x:Static mvvm:ElementsSize.HistoryButtonThickness}"/>
     </Style>
 
     <Style TargetType="TextBlock" x:Key="ItemsHistoryTextBlock" BasedOn="{StaticResource TextBlockStyle}">
-        <Setter Property="Margin" Value="{Binding Height,
-                ElementName=ItemsPanel,
-                Converter={StaticResource MultiplyTopToThicknessConverter},
-                ConverterParameter=0.0025}">
-        </Setter>
+        <Setter Property="Margin" Value="{x:Static mvvm:ElementsSize.HistoryButtonThickness}"/>
     </Style>
     
 </ResourceDictionary>

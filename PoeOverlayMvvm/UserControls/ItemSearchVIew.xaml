@@ -14,58 +14,56 @@
              d:DataContext="{x:Static designer:DesignerDataContextObjects.DesignItemSearch}"
              d:DesignWidth="324">
     <StackPanel>
-        <mvvm:BlankUserControl>
-            <TextBox Text="{Binding Name}" Style="{StaticResource ItemSearchNameTextBoxStyle}"/>
-        </mvvm:BlankUserControl>
-        <mvvm:BlankUserControl>
-            <local:PriceView DataContext="{Binding MaximumBuyout}"/>
-        </mvvm:BlankUserControl>
-        <mvvm:BlankUserControl>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button CommandParameter="{Binding}">
-                    <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
-                            <Style.Triggers>
-                                <DataTrigger Value="True">
-                                    <DataTrigger.Binding>
-                                        <MultiBinding Converter="{StaticResource ElementInIListConverter}">
-                                            <Binding/>
-                                            <Binding Path="ItemConfiguration.CurrentItemSearches" Source="{x:Static model:Configuration.Current}"/>
-                                        </MultiBinding>
-                                    </DataTrigger.Binding>
-                                    <Setter Property="Content">
-                                        <Setter.Value>
-                                            <TextBlock Text="Remove"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Setter Property="Button.Command" Value="{x:Static commandsAndConverters:ItemSearchCommands.MoveToOld}"/>
-                                </DataTrigger>
-                                <DataTrigger Value="True">
-                                    <DataTrigger.Binding>
-                                        <MultiBinding Converter="{StaticResource ElementInIListConverter}">
-                                            <Binding/>
-                                            <Binding Path="ItemConfiguration.OldItemSearches" Source="{x:Static model:Configuration.Current}"/>
-                                        </MultiBinding>
-                                    </DataTrigger.Binding>
-                                    <Setter Property="Content">
-                                        <Setter.Value>
-                                            <TextBlock Text="Restore"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Setter Property="Button.Command" Value="{x:Static commandsAndConverters:ItemSearchCommands.MoveToCurrent}"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <ToggleButton Grid.Column="1" IsChecked="{Binding AutoWhisper}">
-                    <TextBlock Text="Autowhisper"/>
-                </ToggleButton>
-            </Grid>
-        </mvvm:BlankUserControl>
+        <TextBox Text="{Binding Name}" Style="{StaticResource ItemSearchNameTextBoxStyle}"/>
+        <local:PriceView DataContext="{Binding MaximumBuyout}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button CommandParameter="{Binding}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+                        <Style.Triggers>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource ElementInIListConverter}">
+                                        <Binding/>
+                                        <Binding Path="ItemConfiguration.CurrentItemSearches" Source="{x:Static model:Configuration.Current}"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <TextBlock Text="Remove"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Button.Command" Value="{x:Static commandsAndConverters:ItemSearchCommands.MoveToOld}"/>
+                            </DataTrigger>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource ElementInIListConverter}">
+                                        <Binding/>
+                                        <Binding Path="ItemConfiguration.OldItemSearches" Source="{x:Static model:Configuration.Current}"/>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <TextBlock Text="Restore"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Button.Command" Value="{x:Static commandsAndConverters:ItemSearchCommands.MoveToCurrent}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <ToggleButton Grid.Column="1" IsChecked="{Binding AutoWhisper}">
+                <TextBlock Text="AutoWhisper"/>
+            </ToggleButton>
+            <ToggleButton Grid.Column="2" IsChecked="{Binding IgnoreNoBuyout}">
+                <TextBlock Text="IgnoreNoBuyout"/>
+            </ToggleButton>
+        </Grid>
     </StackPanel>
 </UserControl>

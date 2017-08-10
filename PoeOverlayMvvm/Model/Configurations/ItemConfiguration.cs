@@ -11,21 +11,25 @@ namespace PoeOverlayMvvm.Model.Configurations {
 
         [JsonProperty]
         public ObservableCollection<ItemSearch> OldItemSearches { get; }
-        
+
+        [JsonProperty]
         public ObservableCollection<Item> CurrentItems { get; }
-        
+
+        [JsonProperty]
         public ObservableCollection<Item> OldItems { get; }
 
-        [JsonConstructor]
-        public ItemConfiguration(ObservableCollection<ItemSearch> currentSearchItems, ObservableCollection<ItemSearch> oldSearchItems, ObservableCollection<Item> currentOfferedItems, ObservableCollection<Item> oldOfferedItems) {
+        [JsonProperty]
+        public List<string> SeenItemIds { get; }
+
+        public ItemConfiguration(ObservableCollection<ItemSearch> currentSearchItems, ObservableCollection<ItemSearch> oldSearchItems, ObservableCollection<Item> currentItems, ObservableCollection<Item> oldItems, List<string> seenItemIdList)
+        {
+
             CurrentItemSearches = currentSearchItems ?? new ObservableCollection<ItemSearch>();
             // by default search engine is initialized and stopped
-            foreach (var currentSearchItem in CurrentItemSearches) {
-                currentSearchItem.SearchEngine.Start();
-            }
             OldItemSearches = oldSearchItems ?? new ObservableCollection<ItemSearch>();
-            CurrentItems = new ObservableCollection<Item> {DesignerDataContextObjects.DesignHeraldOfAshItem, DesignerDataContextObjects.DesignDoomfletchPrismItem, DesignerDataContextObjects.BloodStrapCrystalBelt, DesignerDataContextObjects.BroodClaspCrystalBelt};
-            OldItems = new ObservableCollection<Item>();
+            CurrentItems = currentItems ?? new ObservableCollection<Item>();
+            OldItems = oldItems ?? new ObservableCollection<Item>();
+            SeenItemIds = seenItemIdList ?? new List<string>();
         }
     }
 }

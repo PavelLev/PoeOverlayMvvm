@@ -29,8 +29,9 @@ namespace PoeOverlayMvvm.Model.SearchEngine
             WebSocketInstance.OnMessage += async (sender, messageEventArgs) => {
                 var postResponse = await Post();
 
-                foreach (var offeredItem in await OfferedItemsHtmlParser.Parse(postResponse.Data)) {
-                    OfferedItemFound?.Invoke(offeredItem);
+                foreach (var item in await PoeTradeItemHtmlParser.Parse(postResponse.Data))
+                {
+                    OfferedItemFound?.Invoke(item);
                 }
             };
 
